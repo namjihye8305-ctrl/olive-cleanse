@@ -1,0 +1,218 @@
+/* ================================================================
+   THE ORIGINAL CLEANSE · GREEN MONSTER — Brand Week Plus
+   올리브영 매거진 에디토리얼 포맷 참고 / Mobile 750px 고정
+   ================================================================ */
+
+/* ---- 로컬 내장 폰트 (오프라인 작동, CDN 불필요) ---- */
+@font-face{ font-family:"Pretendard"; font-weight:100 900; font-display:swap;
+  src:url("../assets/fonts/PretendardVariable.woff2") format("woff2"); }
+@font-face{ font-family:"Fraunces"; font-style:normal; font-weight:300 700; font-display:swap;
+  src:url("../assets/fonts/Fraunces.woff2") format("woff2"); }
+@font-face{ font-family:"Fraunces"; font-style:italic; font-weight:300 700; font-display:swap;
+  src:url("../assets/fonts/Fraunces-Italic.woff2") format("woff2"); }
+@font-face{ font-family:"Archivo"; font-weight:400 800; font-display:swap;
+  src:url("../assets/fonts/Archivo.woff2") format("woff2"); }
+
+:root{
+  --bg:      #fbfaf7;   /* 오프화이트 */
+  --ink:     #211d18;   /* 본문(진브라운) */
+  --muted:   #9a938a;   /* 서브 카피(회색) */
+  --accent:  #ea5b1a;   /* 시트러스 오렌지 (타이틀 톤) */
+  --green:   #2f6b3f;   /* 그린몬스터 포인트 */
+  --dark:    #17140f;   /* 다크 밴드 */
+  --soft:    #f3ebe0;   /* 소프트 밴드(피치) */
+  --line:    rgba(33,29,24,.14);
+  --ease:    cubic-bezier(.16,.84,.34,1);
+  --pad:     64px;      /* 좌우 여백(750px 기준) */
+}
+
+*{ margin:0; padding:0; box-sizing:border-box; }
+html{ background:#0d0d0d; -webkit-text-size-adjust:100%; }
+body{
+  font-family:"Pretendard","Apple SD Gothic Neo",system-ui,sans-serif;
+  color:var(--ink); line-height:1.6; -webkit-font-smoothing:antialiased;
+}
+img{ display:block; max-width:100%; }
+
+.canvas{ width:750px; max-width:100%; margin-inline:auto; background:var(--bg); overflow:hidden; position:relative; }
+.pad{ padding-inline:var(--pad); }
+.center{ text-align:center; }
+
+/* ---- 앱 상단바 ---- */
+.topbar{
+  position:sticky; top:0; z-index:20; background:rgba(251,250,247,.9);
+  backdrop-filter:blur(8px); border-bottom:1px solid var(--line);
+}
+.topbar img{ display:block; width:100%; height:auto; }
+
+/* ================= 타이포 공통 ================= */
+.kicker-row{
+  display:flex; justify-content:space-between; align-items:baseline;
+  font-family:"Archivo",sans-serif; font-size:20px; font-weight:600;
+  letter-spacing:.16em; text-transform:uppercase; color:var(--accent);
+  padding-block:22px 30px; border-top:1px solid var(--line);
+}
+.kicker-row span:last-child{ color:var(--muted); font-weight:400; font-style:italic; font-family:"Fraunces",serif; letter-spacing:.02em; text-transform:none; font-size:24px; }
+.kicker-row.center-row{ justify-content:center; gap:20px; }
+
+.idx{ font-family:"Archivo",sans-serif; font-size:20px; font-weight:600; letter-spacing:.18em; text-transform:uppercase; color:var(--accent); display:block; }
+.idx.accent{ color:var(--accent); }
+.idx.center{ text-align:center; }
+
+.display{ font-family:"Fraunces",serif; font-weight:300; font-size:82px; line-height:.98; letter-spacing:-.01em; }
+.display i{ font-style:italic; font-weight:400; }
+.headline{ font-size:50px; line-height:1.16; font-weight:700; letter-spacing:-.01em; margin-bottom:20px; }
+.lead{ font-size:36px; line-height:1.45; font-weight:300; }
+.lead b{ font-weight:600; color:var(--accent); }
+.body{ font-size:27px; line-height:1.72; color:var(--muted); margin-top:24px; }
+.body.dim{ color:rgba(240,238,231,.62); }
+
+/* 밴드 색 */
+.band-soft{ background:var(--soft); }
+.band-dark{ background:var(--dark); color:#f0eee7; }
+.on-dark{ color:#f0eee7; }
+.band-dark .kicker-row{ border-color:rgba(255,255,255,.16); }
+.band-dark .kicker-row span:last-child{ color:rgba(240,238,231,.6); }
+
+/* ================= 01 HERO (자동 슬라이드 + 타이틀) ================= */
+.hero{ position:relative; width:100%; aspect-ratio:750/1170; overflow:hidden; background:#e9e4dc; }
+
+/* 슬라이더 */
+.hero__slider{ position:absolute; inset:0; }
+.hero__track{
+  display:flex; height:100%; width:calc(100% * var(--n, 2));
+  transform:translateX(calc(-100% * var(--i, 0) / var(--n, 2)));
+  transition:transform .9s var(--ease);
+}
+.hero__slide{ width:calc(100% / var(--n, 2)); height:100%; flex:none;
+  background:center/cover no-repeat; }
+
+/* 타이틀 오버레이 (인트로처럼 상단 배치 + 등장 애니메이션) */
+.hero__title{
+  position:absolute; top:4.5%; left:50%; width:90%;
+  transform:translateX(-50%) translateY(44px); opacity:0; z-index:3;
+  animation:heroTitle 1s var(--ease) .35s forwards;
+}
+@keyframes heroTitle{ to{ opacity:1; transform:translateX(-50%) translateY(0); } }
+
+/* 인디케이터 */
+.hero__dots{ position:absolute; bottom:96px; left:50%; transform:translateX(-50%);
+  display:flex; gap:14px; z-index:3; }
+.hero__dots button{ width:12px; height:12px; border-radius:50%; border:0; cursor:pointer;
+  background:rgba(255,255,255,.55); padding:0; transition:.3s var(--ease); }
+.hero__dots button.on{ background:#fff; width:34px; border-radius:6px; }
+
+/* 스크롤 큐 */
+.hero__scroll{
+  position:absolute; bottom:36px; left:50%; transform:translateX(-50%); z-index:3;
+  font-family:"Archivo",sans-serif; font-size:17px; letter-spacing:.24em; color:#fff;
+  display:flex; flex-direction:column; align-items:center; gap:12px;
+  text-shadow:0 1px 6px rgba(0,0,0,.3);
+}
+.hero__scroll span{ width:1px; height:40px; background:#fff; animation:scrollcue 1.8s var(--ease) infinite; transform-origin:top; }
+@keyframes scrollcue{ 0%{ transform:scaleY(0); } 50%{ transform:scaleY(1); } 100%{ transform:scaleY(0); transform-origin:bottom; } }
+
+/* ================= 02 INTRO ================= */
+.intro{ padding-bottom:120px; }
+.intro .pad{ padding-top:70px; }
+
+/* placeholder(이미지 자리) */
+.ph{
+  background:repeating-linear-gradient(45deg,#e9e2d7,#e9e2d7 20px,#e3dbcd 20px,#e3dbcd 40px);
+  color:#8f8574; display:flex; align-items:center; justify-content:center; text-align:center;
+  font-size:22px; line-height:1.5;
+}
+.ph small{ font-size:16px; opacity:.7; }
+.ph.has-img{ background:center/cover no-repeat; }
+.ph.has-img > span{ display:none; }
+.ph--model{ aspect-ratio:3/4; }
+.ph--wide{ aspect-ratio:4/3; }
+.ph--prod{ aspect-ratio:1/1; width:280px; flex:none; }
+.ph--sq{ aspect-ratio:1/1; width:100%; margin-bottom:14px; }
+.band-dark .ph{ background:repeating-linear-gradient(45deg,#242019,#242019 20px,#2b261e 20px,#2b261e 40px); color:#7d7466; }
+
+/* ================= 03 ESSENTIAL ================= */
+.essential{ padding-block:150px; }
+.essential .display{ margin-block:26px; }
+
+/* ================= 04 BENEFIT ================= */
+.benefit{ padding-block:130px; }
+.checklist{ list-style:none; margin-top:44px; display:flex; flex-direction:column; }
+.checklist li{
+  display:flex; align-items:baseline; gap:32px; padding-block:34px;
+  border-bottom:1px solid var(--line);
+}
+.checklist b{ font-family:"Fraunces",serif; font-size:56px; font-weight:600; color:var(--accent); min-width:130px; }
+.checklist span{ font-size:30px; font-weight:500; }
+.period{
+  margin-top:48px; background:var(--ink); color:#fbfaf7; border-radius:4px;
+  padding:34px 44px; display:flex; justify-content:space-between; align-items:center;
+}
+.period span{ font-family:"Archivo"; letter-spacing:.16em; font-size:19px; color:rgba(255,255,255,.6); }
+.period strong{ font-size:32px; font-weight:600; letter-spacing:.01em; }
+
+/* ================= CHAPTER 공통 ================= */
+.chapter{ padding-bottom:130px; }
+.chapter .pad{ padding-top:64px; }
+.chapter .display{ margin-block:24px 8px; }
+.note{ margin-top:44px; padding-top:30px; border-top:1px solid var(--line); }
+.band-dark .note{ border-color:rgba(255,255,255,.16); }
+.note__k{ font-family:"Fraunces",serif; font-style:italic; font-size:30px; color:var(--accent); }
+.note p{ font-size:26px; color:var(--muted); margin-top:14px; }
+.band-dark .note p{ color:rgba(240,238,231,.6); }
+
+.card-box{
+  margin-top:44px; border:1px solid var(--line); border-radius:4px; padding:44px 46px;
+  background:rgba(255,255,255,.55);
+}
+.band-dark .card-box{ background:rgba(255,255,255,.05); border-color:rgba(255,255,255,.14); }
+.dotlist{ list-style:none; margin-top:26px; }
+.dotlist li{ position:relative; padding-left:34px; font-size:27px; padding-block:12px; }
+.dotlist li::before{ content:""; position:absolute; left:6px; top:26px; width:9px; height:9px; border-radius:50%; background:var(--accent); }
+.band-dark .dotlist li{ color:#e9e5dc; }
+
+/* 과일 그리드 */
+.fruits{ padding-top:90px; }
+.fruitgrid{ list-style:none; margin-top:40px; display:grid; grid-template-columns:repeat(3,1fr); gap:34px 28px; }
+.fruitgrid li{ text-align:center; font-family:"Archivo"; font-size:22px; font-weight:600; letter-spacing:.08em; color:var(--ink); }
+
+/* 제품 + 가격 */
+.product{ margin-top:90px; padding-block:80px; display:flex; align-items:center; gap:44px; }
+.product__info{ flex:1; }
+.vits{ font-family:"Archivo"; font-size:21px; letter-spacing:.06em; color:var(--green); font-weight:600; display:block; }
+.price{ display:flex; align-items:baseline; gap:18px; margin-top:26px; flex-wrap:wrap; }
+.price__off{ font-family:"Fraunces",serif; font-size:44px; font-weight:600; color:var(--accent); }
+.price__was{ font-size:26px; color:var(--muted); text-decoration:line-through; }
+.price__now{ font-size:52px; font-weight:800; font-family:"Archivo"; letter-spacing:-.01em; width:100%; }
+.price.on-dark .price__was{ color:rgba(240,238,231,.5); }
+.price.on-dark{ justify-content:center; margin-top:36px; }
+
+/* ================= 08 OUTRO ================= */
+.outro{
+  background:var(--accent); color:#fff; text-align:center; padding:170px var(--pad) 150px;
+}
+.outro__title{ font-family:"Fraunces",serif; font-weight:600; font-size:74px; line-height:1; }
+.outro__title span{ display:block; }
+.outro__copy{ margin-top:36px; font-size:30px; font-weight:300; color:rgba(255,255,255,.9); }
+.cta{
+  display:inline-block; margin-top:56px; padding:28px 76px; background:#fff; color:var(--accent);
+  font-family:"Archivo"; font-size:26px; font-weight:800; letter-spacing:.12em;
+  text-decoration:none; border-radius:100px;
+}
+
+/* ================= 09 CREDIT ================= */
+.credit{ background:var(--dark); color:#cfc9bf; text-align:center; padding:120px var(--pad); }
+.credit .idx{ color:#e07a3e; margin-bottom:34px; }
+.credit__list{ font-size:24px; line-height:2; color:#a9a397; }
+.credit__foot{ margin-top:44px; font-family:"Archivo"; letter-spacing:.2em; font-size:18px; color:#6d675d; }
+
+/* ================= 스크롤 리빌 ================= */
+.reveal{ opacity:0; transition:opacity .85s var(--ease), transform .85s var(--ease); will-change:opacity,transform; }
+.reveal[data-reveal="up"]{ transform:translateY(48px); }
+.reveal[data-reveal="fade"]{ transform:none; }
+.reveal.is-in{ opacity:1; transform:none; }
+
+@media (prefers-reduced-motion:reduce){
+  .reveal,.hero__line,.hero__tagline,.hero__badge,.hero__scroll span{
+    transition:none !important; animation:none !important; opacity:1 !important; transform:none !important; }
+}

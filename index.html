@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>THE ORIGINAL CLEANSE · GREEN MONSTER | Brand Week Plus</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+<!-- ================================================================
+     Mobile 750px 에디토리얼 · 올리브영 브랜드위크플러스 포맷 참고
+     구성: HERO → 브랜드스토리 → BENEFIT → CH.01 → CH.02 → CH.03 → 마감 → 크레딧
+     * data-reveal / data-delay = 스크롤 등장 모션 (js/reveal.js)
+     * 이미지 자리는 .ph (placeholder) — assets/에 파일 넣고 교체
+     ================================================================ -->
+<main class="canvas">
+
+  <!-- 앱 상단바 -->
+  <header class="topbar">
+    <img src="assets/gnb.png" alt="매거진" />
+  </header>
+
+  <!-- ============ 01 · HERO (자동 슬라이드 + 타이틀 오버레이) ============ -->
+  <section class="hero" id="hero">
+    <div class="hero__slider">
+      <div class="hero__track" id="heroTrack" style="--n:2; --i:0;">
+        <div class="hero__slide" style="background-image:url(assets/hero-01.jpg)"></div>
+        <div class="hero__slide" style="background-image:url(assets/hero-02.jpg)"></div>
+      </div>
+    </div>
+    <img class="hero__title" src="assets/title-green.png" alt="THE ORIGINAL CLEANSE" />
+  </section>
+
+</main>
+<script src="js/reveal.js"></script>
+</body>
+</html>
