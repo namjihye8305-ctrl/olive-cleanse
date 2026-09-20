@@ -15,7 +15,7 @@
     if (!track) return;
     var n = parseInt(getComputedStyle(track).getPropertyValue('--n')) || 2;
     var dots = dotsWrap ? [].slice.call(dotsWrap.children) : [];
-    var i = 0, timer = null, INTERVAL = 3500;
+    var i = 0, timer = null, firstTimer = null, INTERVAL = 3500, FIRST_DELAY = 900;
 
     function go(idx) {
       i = (idx + n) % n;
@@ -23,8 +23,15 @@
       dots.forEach(function (d, k) { d.classList.toggle('on', k === i); });
     }
     function next() { go(i + 1); }
-    function start() { if (!reduce) { stop(); timer = setInterval(next, INTERVAL); } }
-    function stop() { if (timer) clearInterval(timer); }
+    function start() {
+      if (reduce) return;
+      stop();
+      firstTimer = setTimeout(function () {
+        next();
+        timer = setInterval(next, INTERVAL);
+      }, FIRST_DELAY);
+    }
+    function stop() { if (timer) clearInterval(timer); if (firstTimer) clearTimeout(firstTimer); }
 
     dots.forEach(function (d, k) {
       d.addEventListener('click', function () { go(k); start(); });

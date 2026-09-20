@@ -93,8 +93,8 @@ img{ display:block; max-width:100%; }
   transform:translateX(-50%); z-index:3;
 }
 .hero__title-line{ display:block; width:100%; opacity:0; transform:translateY(44px); }
-.hero__title-line--1{ animation:heroTitle 1s var(--ease) .35s forwards; }
-.hero__title-line--2{ animation:heroTitle 1s var(--ease) .75s forwards; }
+.hero__title-line--1{ animation:heroTitle .5s var(--ease) .1s forwards; }
+.hero__title-line--2{ animation:heroTitle .5s var(--ease) .32s forwards; }
 @keyframes heroTitle{ to{ opacity:1; transform:translateY(0); } }
 
 /* 히어로 사진 하단에 겹치는 브랜드 정보 패널 (intro.png 기준 y=914 지점부터 시작 → 사진 하단 256px과 겹침) */
