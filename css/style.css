@@ -90,10 +90,12 @@ img{ display:block; max-width:100%; }
 /* 타이틀 오버레이 (인트로처럼 상단 배치 + 등장 애니메이션) */
 .hero__title{
   position:absolute; top:4.5%; left:50%; width:90%;
-  transform:translateX(-50%) translateY(44px); opacity:0; z-index:3;
-  animation:heroTitle 1s var(--ease) .35s forwards;
+  transform:translateX(-50%); z-index:3;
 }
-@keyframes heroTitle{ to{ opacity:1; transform:translateX(-50%) translateY(0); } }
+.hero__title-line{ display:block; width:100%; opacity:0; transform:translateY(44px); }
+.hero__title-line--1{ animation:heroTitle 1s var(--ease) .35s forwards; }
+.hero__title-line--2{ animation:heroTitle 1s var(--ease) .75s forwards; }
+@keyframes heroTitle{ to{ opacity:1; transform:translateY(0); } }
 
 /* 히어로 사진 하단에 겹치는 브랜드 정보 패널 (intro.png 기준 y=914 지점부터 시작 → 사진 하단 256px과 겹침) */
 .brand-panel{ position:relative; z-index:5; width:100%; margin-top:-34.133%; }
