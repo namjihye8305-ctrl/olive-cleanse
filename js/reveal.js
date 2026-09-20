@@ -15,7 +15,7 @@
     if (!track) return;
     var n = parseInt(getComputedStyle(track).getPropertyValue('--n')) || 2;
     var dots = dotsWrap ? [].slice.call(dotsWrap.children) : [];
-    var i = 0, timer = null, firstTimer = null, INTERVAL = 3500, FIRST_DELAY = 900;
+    var i = 0, timer = null, firstTimer = null, INTERVAL = 3500, FIRST_DELAY = 1400;
 
     function go(idx) {
       i = (idx + n) % n;
