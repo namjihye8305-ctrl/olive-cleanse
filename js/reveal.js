@@ -33,15 +33,16 @@
   });
   if (!zooms.length && !slides.length) return;
 
-  function progressOf(el) {
+  function progressOf(el, totalOverride) {
     var rect = el.getBoundingClientRect();
     var vh = window.innerHeight;
-    var total = vh + rect.height;
+    var total = totalOverride || (vh + rect.height);
     var p = (vh - rect.top) / total;
     return Math.max(0, Math.min(1, p));
   }
 
   var ZOOM_FROM = 1, ZOOM_TO = 1.22;
+  var SLIDE_SPEEDUP = 2.6; // 클수록 더 적게 스크롤해도 끝까지 슬라이드됨
 
   function update() {
     zooms.forEach(function (z) {
@@ -50,7 +51,10 @@
       z.img.style.transform = 'scale(' + scale.toFixed(4) + ')';
     });
     slides.forEach(function (s) {
-      var p = progressOf(s.el);
+      var rect = s.el.getBoundingClientRect();
+      var vh = window.innerHeight;
+      var fastTotal = (vh + rect.height) / SLIDE_SPEEDUP;
+      var p = progressOf(s.el, fastTotal);
       s.track.style.transform = 'translateX(' + (-50 * p).toFixed(2) + '%)';
     });
   }

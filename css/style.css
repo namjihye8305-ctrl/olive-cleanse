@@ -106,6 +106,107 @@ img{ display:block; width:100%; }
 .scrub-slide__track{ display:flex; width:200%; will-change:transform; }
 .scrub-slide__track img{ width:50%; flex:none; display:block; }
 
+/* ---- 18: 주스 아이콘 12개가 없다가 순서대로 하나씩 나타남 (무한반복) ---- */
+.glass-wrap{ position:relative; width:100%; }
+.glass-icon{ position:absolute; display:block; opacity:0; transform:scale(.5); transform-origin:center bottom; }
+
+@keyframes glassPop0{
+  0.00%{ opacity:0; transform:scale(.5); }
+  6.52%{ opacity:1; transform:scale(1); }
+  92.39%{ opacity:1; transform:scale(1); }
+  100%{ opacity:0; transform:scale(.5); }
+}
+@keyframes glassPop1{
+  0%{ opacity:0; transform:scale(.5); }
+  5.43%{ opacity:0; transform:scale(.5); }
+  11.96%{ opacity:1; transform:scale(1); }
+  92.39%{ opacity:1; transform:scale(1); }
+  100%{ opacity:0; transform:scale(.5); }
+}
+@keyframes glassPop2{
+  0%{ opacity:0; transform:scale(.5); }
+  10.87%{ opacity:0; transform:scale(.5); }
+  17.39%{ opacity:1; transform:scale(1); }
+  92.39%{ opacity:1; transform:scale(1); }
+  100%{ opacity:0; transform:scale(.5); }
+}
+@keyframes glassPop3{
+  0%{ opacity:0; transform:scale(.5); }
+  16.30%{ opacity:0; transform:scale(.5); }
+  22.83%{ opacity:1; transform:scale(1); }
+  92.39%{ opacity:1; transform:scale(1); }
+  100%{ opacity:0; transform:scale(.5); }
+}
+@keyframes glassPop4{
+  0%{ opacity:0; transform:scale(.5); }
+  21.74%{ opacity:0; transform:scale(.5); }
+  28.26%{ opacity:1; transform:scale(1); }
+  92.39%{ opacity:1; transform:scale(1); }
+  100%{ opacity:0; transform:scale(.5); }
+}
+@keyframes glassPop5{
+  0%{ opacity:0; transform:scale(.5); }
+  27.17%{ opacity:0; transform:scale(.5); }
+  33.70%{ opacity:1; transform:scale(1); }
+  92.39%{ opacity:1; transform:scale(1); }
+  100%{ opacity:0; transform:scale(.5); }
+}
+@keyframes glassPop6{
+  0%{ opacity:0; transform:scale(.5); }
+  32.61%{ opacity:0; transform:scale(.5); }
+  39.13%{ opacity:1; transform:scale(1); }
+  92.39%{ opacity:1; transform:scale(1); }
+  100%{ opacity:0; transform:scale(.5); }
+}
+@keyframes glassPop7{
+  0%{ opacity:0; transform:scale(.5); }
+  38.04%{ opacity:0; transform:scale(.5); }
+  44.57%{ opacity:1; transform:scale(1); }
+  92.39%{ opacity:1; transform:scale(1); }
+  100%{ opacity:0; transform:scale(.5); }
+}
+@keyframes glassPop8{
+  0%{ opacity:0; transform:scale(.5); }
+  43.48%{ opacity:0; transform:scale(.5); }
+  50.00%{ opacity:1; transform:scale(1); }
+  92.39%{ opacity:1; transform:scale(1); }
+  100%{ opacity:0; transform:scale(.5); }
+}
+@keyframes glassPop9{
+  0%{ opacity:0; transform:scale(.5); }
+  48.91%{ opacity:0; transform:scale(.5); }
+  55.43%{ opacity:1; transform:scale(1); }
+  92.39%{ opacity:1; transform:scale(1); }
+  100%{ opacity:0; transform:scale(.5); }
+}
+@keyframes glassPop10{
+  0%{ opacity:0; transform:scale(.5); }
+  54.35%{ opacity:0; transform:scale(.5); }
+  60.87%{ opacity:1; transform:scale(1); }
+  92.39%{ opacity:1; transform:scale(1); }
+  100%{ opacity:0; transform:scale(.5); }
+}
+@keyframes glassPop11{
+  0%{ opacity:0; transform:scale(.5); }
+  59.78%{ opacity:0; transform:scale(.5); }
+  66.30%{ opacity:1; transform:scale(1); }
+  92.39%{ opacity:1; transform:scale(1); }
+  100%{ opacity:0; transform:scale(.5); }
+}
+
+.glass-icon-0{ animation:glassPop0 4.6s linear infinite; }
+.glass-icon-1{ animation:glassPop1 4.6s linear infinite; }
+.glass-icon-2{ animation:glassPop2 4.6s linear infinite; }
+.glass-icon-3{ animation:glassPop3 4.6s linear infinite; }
+.glass-icon-4{ animation:glassPop4 4.6s linear infinite; }
+.glass-icon-5{ animation:glassPop5 4.6s linear infinite; }
+.glass-icon-6{ animation:glassPop6 4.6s linear infinite; }
+.glass-icon-7{ animation:glassPop7 4.6s linear infinite; }
+.glass-icon-8{ animation:glassPop8 4.6s linear infinite; }
+.glass-icon-9{ animation:glassPop9 4.6s linear infinite; }
+.glass-icon-10{ animation:glassPop10 4.6s linear infinite; }
+.glass-icon-11{ animation:glassPop11 4.6s linear infinite; }
+
 /* ---- 스크롤로 들어오면: 아래→위 등장(1회) 후 두 이미지 페이드인아웃 반복 (js/reveal.js 가 .is-in 토글) ---- */
 .rise-fade{ position:relative; width:100%; overflow:hidden; }
 .rise-fade img{
@@ -129,4 +230,5 @@ img{ display:block; width:100%; }
   .rise-fade img{ transition:none !important; opacity:1 !important; transform:none !important; }
   .rise-fade.is-in img:first-child,.rise-fade.is-in img:last-child{ animation:none !important; }
   .rise-fade img:last-child{ opacity:0 !important; }
+  .glass-icon{ animation:none !important; opacity:1 !important; transform:scale(1) !important; }
 }
