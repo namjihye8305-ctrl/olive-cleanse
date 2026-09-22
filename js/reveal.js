@@ -19,3 +19,50 @@
 
   items.forEach(function (el) { io.observe(el); });
 })();
+
+/* 스크롤 연동(스크러빙): 휠 스크롤 진행률에 맞춰서만 움직임 (자동재생 없음) */
+(function () {
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce) return;
+
+  var zooms = [].slice.call(document.querySelectorAll('.scrub-zoom')).map(function (el) {
+    return { el: el, img: el.querySelector('img') };
+  });
+  var slides = [].slice.call(document.querySelectorAll('.scrub-slide')).map(function (el) {
+    return { el: el, track: el.querySelector('.scrub-slide__track') };
+  });
+  if (!zooms.length && !slides.length) return;
+
+  function progressOf(el) {
+    var rect = el.getBoundingClientRect();
+    var vh = window.innerHeight;
+    var total = vh + rect.height;
+    var p = (vh - rect.top) / total;
+    return Math.max(0, Math.min(1, p));
+  }
+
+  var ZOOM_FROM = 1, ZOOM_TO = 1.22;
+
+  function update() {
+    zooms.forEach(function (z) {
+      var p = progressOf(z.el);
+      var scale = ZOOM_FROM + (ZOOM_TO - ZOOM_FROM) * p;
+      z.img.style.transform = 'scale(' + scale.toFixed(4) + ')';
+    });
+    slides.forEach(function (s) {
+      var p = progressOf(s.el);
+      s.track.style.transform = 'translateX(' + (-50 * p).toFixed(2) + '%)';
+    });
+  }
+
+  var ticking = false;
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function () { update(); ticking = false; });
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+  update();
+})();

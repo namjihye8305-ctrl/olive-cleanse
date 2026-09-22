@@ -55,6 +55,13 @@ img{ display:block; width:100%; }
   position:absolute; inset:0; width:100%; z-index:3; pointer-events:none;
 }
 
+/* ---- 2장 페이드인아웃 (등장 없이 계속 반복) ---- */
+.fade2{ position:relative; width:100%; overflow:hidden; }
+.fade2 img{ width:100%; display:block; }
+.fade2 img:last-child{ position:absolute; inset:0; }
+.fade2 img:first-child{ animation:fadeAB1 6s linear infinite; }
+.fade2 img:last-child{ animation:fadeAB2 6s linear infinite; }
+
 /* ---- 히어로 전용 스와이프: 살짝 여유있게, 부드럽게 ---- */
 .hero-swipe{ position:relative; width:100%; overflow:hidden; }
 .hero-swipe__track{ display:flex; width:200%; animation:heroSwipeCycle 4.6s cubic-bezier(.45,0,.15,1) infinite; }
@@ -89,31 +96,37 @@ img{ display:block; width:100%; }
 .reveal-txt.dir-right{ transform:translateX(90px); }        /* 오른쪽→왼쪽 */
 .reveal-txt.is-in{ opacity:1; transform:none; }
 
-/* ---- 가로 무한 스크롤 (2장 반복) ---- */
-.marquee-h{ position:relative; width:100%; overflow:hidden; }
-.marquee-h__track{ display:flex; width:400%; animation:marqueeLeft 10s linear infinite; }
-.marquee-h__track img{ width:25%; flex:none; display:block; }
-@keyframes marqueeLeft{ 0%{ transform:translateX(0); } 100%{ transform:translateX(-50%); } }
+/* ---- 스크롤 연동(스크러빙) 전용: JS(reveal.js)가 휠 스크롤 진행률에 맞춰 transform 직접 갱신 ---- */
+/* 19: 스크롤할수록 사진이 줌인 */
+.scrub-zoom{ position:relative; width:100%; overflow:hidden; }
+.scrub-zoom img{ width:100%; display:block; transform-origin:center center; will-change:transform; }
+
+/* 20: 스크롤하는 동안에만 20-1 → 20-2로 가로 슬라이드 */
+.scrub-slide{ position:relative; width:100%; overflow:hidden; }
+.scrub-slide__track{ display:flex; width:200%; will-change:transform; }
+.scrub-slide__track img{ width:50%; flex:none; display:block; }
 
 /* ---- 스크롤로 들어오면: 아래→위 등장(1회) 후 두 이미지 페이드인아웃 반복 (js/reveal.js 가 .is-in 토글) ---- */
-.rise-fade{
-  position:relative; width:100%; overflow:hidden;
-  opacity:0; transform:translateY(100px);
+.rise-fade{ position:relative; width:100%; overflow:hidden; }
+.rise-fade img{
+  width:100%; display:block; opacity:0; transform:translateY(100px);
   transition:opacity 1s cubic-bezier(.16,.84,.34,1), transform 1s cubic-bezier(.16,.84,.34,1);
 }
-.rise-fade.is-in{ opacity:1; transform:translateY(0); }
-.rise-fade img{ width:100%; display:block; }
 .rise-fade img:last-child{ position:absolute; inset:0; }
-.rise-fade.is-in img:first-child{ animation:fadeAB1 6s linear .8s infinite; }
+.rise-fade.is-in img{ transform:translateY(0); }
+.rise-fade.is-in img:first-child{ opacity:1; animation:fadeAB1 6s linear .8s infinite; }
 .rise-fade.is-in img:last-child{ animation:fadeAB2 6s linear .8s infinite; }
 @keyframes fadeAB1{ 0%{ opacity:1; } 40%{ opacity:1; } 50%{ opacity:0; } 90%{ opacity:0; } 100%{ opacity:1; } }
 @keyframes fadeAB2{ 0%{ opacity:0; } 40%{ opacity:0; } 50%{ opacity:1; } 90%{ opacity:1; } 100%{ opacity:0; } }
 
 @media (prefers-reduced-motion: reduce){
-  .hero-swipe__track,.swipe__track,.marquee-h__track{ animation:none !important; }
+  .hero-swipe__track,.swipe__track{ animation:none !important; }
+  .fade2 img{ animation:none !important; }
+  .fade2 img:first-child{ opacity:1 !important; }
+  .fade2 img:last-child{ opacity:0 !important; }
   .hero-swipe__title{ animation:none !important; opacity:1 !important; transform:none !important; }
   .reveal-txt{ transition:none !important; opacity:1 !important; transform:none !important; }
-  .rise-fade{ transition:none !important; opacity:1 !important; transform:none !important; }
+  .rise-fade img{ transition:none !important; opacity:1 !important; transform:none !important; }
   .rise-fade.is-in img:first-child,.rise-fade.is-in img:last-child{ animation:none !important; }
-  .rise-fade img:last-child{ opacity:0; }
+  .rise-fade img:last-child{ opacity:0 !important; }
 }
