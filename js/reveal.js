@@ -59,7 +59,8 @@
       z.img.style.transform = 'scale(' + scale.toFixed(4) + ')';
     });
     slides.forEach(function (s) {
-      var p = progressOf(s.el);
+      var raw = progressOf(s.el);
+      var p = s.el.classList.contains('slide-late') ? Math.max(0, (raw - 0.35) / 0.65) : raw;
       s.track.style.transform = 'translateX(' + (-50 * p).toFixed(2) + '%)';
     });
     blurs.forEach(function (b) {
