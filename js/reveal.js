@@ -36,7 +36,10 @@
   var blurs = [].slice.call(document.querySelectorAll('.blur-scrub')).map(function (el) {
     return { el: el };
   });
-  if (!zooms.length && !slides.length && !blurs.length) return;
+  var blurGrows = [].slice.call(document.querySelectorAll('.blur-grow')).map(function (el) {
+    return { el: el };
+  });
+  if (!zooms.length && !slides.length && !blurs.length && !blurGrows.length) return;
 
   function progressOf(el, totalOverride) {
     var rect = el.getBoundingClientRect();
@@ -46,7 +49,7 @@
     return Math.max(0, Math.min(1, p));
   }
 
-  var ZOOM_FROM = 1, ZOOM_TO = 1.22;
+  var ZOOM_FROM = 1.06, ZOOM_TO = 1.22; // 1보다 살짝 크게 시작 — 블러 상태일 때 가장자리 흰 여백 방지
   var MAX_BLUR = 18;
 
   /* 20번: 화면에 보이기 시작(하단 진입)할 때 시작점(0%), 화면을 다 빠져나갈 때(상단 이탈) 끝점(100%)
@@ -65,6 +68,10 @@
       var raw = progressOf(b.el);
       var p = Math.min(1, raw / 0.35); // 화면에 들어오고 나서 얼마 안 가 바로 또렷해짐
       b.el.style.filter = 'blur(' + (MAX_BLUR * (1 - p)).toFixed(2) + 'px)';
+    });
+    blurGrows.forEach(function (b) {
+      var p = progressOf(b.el); // 스크롤될수록(화면에서 위로 지나갈수록) 점점 블러
+      b.el.style.filter = 'blur(' + (MAX_BLUR * p).toFixed(2) + 'px)';
     });
   }
 

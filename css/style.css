@@ -52,11 +52,11 @@ img{ display:block; width:100%; }
 }
 
 .swipe__overlay{
-  position:absolute; inset:0; width:100%; z-index:3; pointer-events:none;
+  position:absolute; top:0; left:0; width:100%; z-index:3; pointer-events:none;
 }
 
 /* ---- 2장 페이드인아웃 (등장 없이 계속 반복) ---- */
-.fade2{ position:relative; width:100%; overflow:hidden; }
+.fade2{ position:relative; width:100%; overflow:hidden; margin-top:-1px; }
 .fade2 img{ width:100%; display:block; }
 .fade2 img:last-child{ position:absolute; inset:0; }
 .fade2 img:first-child{ animation:fadeAB1 6s linear infinite; }
@@ -106,8 +106,12 @@ img{ display:block; width:100%; }
 .scrub-slide__track{ display:flex; width:200%; will-change:transform; }
 .scrub-slide__track img{ width:50%; flex:none; display:block; }
 
-/* 03, 19: 스크롤할수록 블러 → 선명 */
+/* 19: 스크롤할수록 블러 → 선명 */
 .blur-scrub{ filter:blur(18px); will-change:filter; }
+
+/* 03: 스크롤할수록 선명(원본) → 블러 + 확대 (반대 방향) */
+.blur-grow{ filter:blur(0px); will-change:filter; }
+.blur-grow img{ will-change:transform,filter; }
 
 /* ---- 18: 주스 아이콘 12개가 없다가 순서대로 하나씩 나타남 (무한반복) ---- */
 .glass-wrap{ position:relative; width:100%; }
@@ -237,5 +241,5 @@ img{ display:block; width:100%; }
   .rise-fade.is-in img:first-child,.rise-fade.is-in img:last-child{ animation:none !important; }
   .rise-fade img:last-child{ opacity:0 !important; }
   .glass-icon{ animation:none !important; opacity:1 !important; transform:scale(1) !important; }
-  .blur-scrub{ filter:none !important; }
+  .blur-scrub,.blur-grow{ filter:none !important; }
 }
