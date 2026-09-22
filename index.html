@@ -42,7 +42,7 @@
       <img src="assets2/r06-a.jpg" alt="" />
       <img src="assets2/r06-b.jpg" alt="" />
     </div>
-    <img class="swipe__overlay" src="assets2/r06-txt.png" alt="" />
+    <img class="swipe__overlay reveal-txt" src="assets2/r06-txt.png" alt="" />
   </div>
 
   <!-- 07 Exercise Diet -->
@@ -59,7 +59,7 @@
   <!-- 09 사진+텍스트(고정) -->
   <div class="static-txt">
     <img src="assets2/r09.png" alt="" />
-    <img src="assets2/r09-txt.png" alt="" />
+    <img class="reveal-txt" src="assets2/r09-txt.png" alt="" />
   </div>
 
   <!-- 10 Chapter 02 title -->
@@ -68,7 +68,7 @@
   <!-- 11 사진+텍스트(고정) -->
   <div class="static-txt">
     <img src="assets2/r11.png" alt="" />
-    <img src="assets2/r11-txt.png" alt="" />
+    <img class="reveal-txt" src="assets2/r11-txt.png" alt="" />
   </div>
 
   <!-- 12 크로스페이드 x3 -->
@@ -81,27 +81,30 @@
   <!-- 13 사진+텍스트(고정) -->
   <div class="static-txt">
     <img src="assets2/r13.png" alt="" />
-    <img src="assets2/r13-txt.png" alt="" />
+    <img class="reveal-txt" src="assets2/r13-txt.png" alt="" />
   </div>
 
   <!-- 14 essential oil -->
   <img src="assets2/r14.jpg" alt="" />
 
-  <!-- 15 사진+텍스트(고정) -->
+  <!-- 15 사진 + 텍스트(세로 무한 스크롤) -->
   <div class="static-txt">
     <img src="assets2/r15.png" alt="" />
-    <img src="assets2/r15-txt.png" alt="" />
+    <div class="marquee-v">
+      <div class="marquee-v__track">
+        <img src="assets2/r15-txt.png" alt="" />
+        <img src="assets2/r15-txt.png" alt="" />
+      </div>
+    </div>
   </div>
 
   <!-- 16 가격 -->
   <img src="assets2/r16.jpg" alt="" />
 
-  <!-- 17 스와이프 (How to Drink) -->
-  <div class="swipe">
-    <div class="swipe__track">
-      <img src="assets2/r17-a.jpg" alt="" />
-      <img src="assets2/r17-b.png" alt="" />
-    </div>
+  <!-- 17 아래→위 등장 후 페이드인아웃 (How to Drink) -->
+  <div class="rise-fade">
+    <img src="assets2/r17-a.jpg" alt="" />
+    <img src="assets2/r17-b.png" alt="" />
   </div>
 
   <!-- 18 Light/Basic 스케줄 -->
@@ -109,9 +112,11 @@
   <!-- 19 붓는 사진 -->
   <img src="assets2/r19.jpg" alt="" />
 
-  <!-- 20 스와이프 -->
-  <div class="swipe">
-    <div class="swipe__track">
+  <!-- 20 가로 무한 스크롤 -->
+  <div class="marquee-h">
+    <div class="marquee-h__track">
+      <img src="assets2/r20-a.jpg" alt="" />
+      <img src="assets2/r20-b.png" alt="" />
       <img src="assets2/r20-a.jpg" alt="" />
       <img src="assets2/r20-b.png" alt="" />
     </div>
@@ -137,5 +142,6 @@
   <img src="assets2/r26.jpg" alt="" />
 
 </main>
+<script src="js/reveal.js"></script>
 </body>
 </html>
