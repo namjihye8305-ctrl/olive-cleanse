@@ -53,7 +53,8 @@
      — 보이는 동안 내내 천천히 진행되고, 시작/끝이 항상 화면 안에서 일어남 */
   function update() {
     zooms.forEach(function (z) {
-      var p = progressOf(z.el);
+      var raw = progressOf(z.el);
+      var p = z.el.classList.contains('zoom-late') ? Math.max(0, (raw - 0.3) / 0.7) : raw;
       var scale = ZOOM_FROM + (ZOOM_TO - ZOOM_FROM) * p;
       z.img.style.transform = 'scale(' + scale.toFixed(4) + ')';
     });
