@@ -37,3 +37,31 @@ img{ display:block; width:100%; }
   .photo-fade img{ animation:none !important; opacity:1 !important; }
   .photo-fade img:not(:first-child){ display:none; }
 }
+
+/* ---- 히어로: 타이틀(아래→위 등장, 고정 위치) + 사진 좌우 자동 스와이프 ---- */
+.hero-swipe{ position:relative; width:100%; overflow:hidden; }
+.hero-swipe__track{ display:flex; width:200%; animation:heroSwipe 8s ease-in-out infinite; }
+.hero-swipe__track img{ width:50%; flex:none; display:block; }
+
+@keyframes heroSwipe{
+  0%{ transform:translateX(0); }
+  40%{ transform:translateX(0); }
+  50%{ transform:translateX(-50%); }
+  90%{ transform:translateX(-50%); }
+  100%{ transform:translateX(0); }
+}
+
+.hero-swipe__title{
+  position:absolute; inset:0; width:100%; z-index:3;
+  opacity:0; transform:translateY(50px);
+  animation:heroTitleRise .8s cubic-bezier(.16,.84,.34,1) .2s forwards;
+}
+@keyframes heroTitleRise{ to{ opacity:1; transform:translateY(0); } }
+
+/* 히어로 하단에 겹치는 브랜드 패널 (hero-panel.png 기준, 사진 하단 119px과 겹침) */
+.hero-panel{ position:relative; z-index:5; width:100%; margin-top:-15.867%; }
+
+@media (prefers-reduced-motion: reduce){
+  .hero-swipe__track{ animation:none !important; }
+  .hero-swipe__title{ animation:none !important; opacity:1 !important; transform:none !important; }
+}
