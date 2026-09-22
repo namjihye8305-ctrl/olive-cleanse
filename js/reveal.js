@@ -1,7 +1,7 @@
-/* 텍스트 오버레이(.reveal-txt) 스크롤 등장 모션: 뷰에 들어오면 .is-in 추가, 한 번만 재생 */
+/* 스크롤 등장 모션(.reveal-txt, .rise-fade): 뷰에 들어오면 .is-in 추가, 한 번만 재생 */
 (function () {
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var items = document.querySelectorAll('.reveal-txt');
+  var items = document.querySelectorAll('.reveal-txt, .rise-fade');
   if (!items.length) return;
 
   if (reduce || !('IntersectionObserver' in window)) {
