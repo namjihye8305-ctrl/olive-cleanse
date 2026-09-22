@@ -38,21 +38,23 @@ img{ display:block; width:100%; }
   .photo-fade img:not(:first-child){ display:none; }
 }
 
-/* ---- 히어로: 타이틀(아래→위 등장, 고정 위치) + 사진 좌우 자동 스와이프 ---- */
-.hero-swipe{ position:relative; width:100%; overflow:hidden; }
-.hero-swipe__track{ display:flex; width:200%; animation:heroSwipe 8s ease-in-out infinite; }
-.hero-swipe__track img{ width:50%; flex:none; display:block; }
+/* ---- 좌우 자동 스와이프 (2장) — 첫 전환은 빠르게, 이후 일반 속도로 반복 ---- */
+.hero-swipe,.swipe{ position:relative; width:100%; overflow:hidden; }
+.hero-swipe__track,.swipe__track{ display:flex; width:200%; animation:swipeCycle 6s ease-in-out infinite; }
+.hero-swipe__track img,.swipe__track img{ width:50%; flex:none; display:block; }
 
-@keyframes heroSwipe{
+@keyframes swipeCycle{
   0%{ transform:translateX(0); }
-  40%{ transform:translateX(0); }
-  50%{ transform:translateX(-50%); }
-  90%{ transform:translateX(-50%); }
+  20%{ transform:translateX(0); }
+  33.33%{ transform:translateX(-50%); }
+  86.67%{ transform:translateX(-50%); }
   100%{ transform:translateX(0); }
 }
 
+.hero-swipe__title,.swipe__overlay{
+  position:absolute; inset:0; width:100%; z-index:3; pointer-events:none;
+}
 .hero-swipe__title{
-  position:absolute; inset:0; width:100%; z-index:3;
   opacity:0; transform:translateY(50px);
   animation:heroTitleRise .8s cubic-bezier(.16,.84,.34,1) .2s forwards;
 }
@@ -61,7 +63,11 @@ img{ display:block; width:100%; }
 /* 히어로 하단에 겹치는 브랜드 패널 (hero-panel.png 기준, 사진 하단 119px과 겹침) */
 .hero-panel{ position:relative; z-index:5; width:100%; margin-top:-15.867%; }
 
+/* ---- 사진 1장 + 텍스트 오버레이 (모션 없음) ---- */
+.static-txt{ position:relative; width:100%; }
+.static-txt img:last-child{ position:absolute; inset:0; width:100%; }
+
 @media (prefers-reduced-motion: reduce){
-  .hero-swipe__track{ animation:none !important; }
+  .hero-swipe__track,.swipe__track{ animation:none !important; }
   .hero-swipe__title{ animation:none !important; opacity:1 !important; transform:none !important; }
 }

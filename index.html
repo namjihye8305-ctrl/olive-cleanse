@@ -8,11 +8,10 @@
 </head>
 <body>
 <!-- ================================================================
-     Mobile 750px 에디토리얼 · 새 디자인(mo_01~03) 전체 반영
-     구성: HERO → 브랜드/Summer Essential → BENEFIT → CH.01(x2 사진) →
-          CH.02(x2 사진) → CH.03(x2 사진) → 마감/크레딧
-     * .photo-fade 안의 이미지 3장은 자동 크로스페이드로 순환 (motion)
-     * 나머지는 고정 이미지 슬라이스
+     Mobile 750px 에디토리얼 · 새 디자인(코딩/images) 전체 반영
+     * .hero-swipe / .swipe  = 2장 좌우 자동 스와이프 (+ 타이틀/텍스트 오버레이)
+     * .photo-fade           = 3장 자동 크로스페이드
+     * .static-txt           = 사진 1장 + 텍스트 오버레이 (모션 없음)
      ================================================================ -->
 <main class="canvas">
 
@@ -20,6 +19,7 @@
     <img src="assets2/gnb.jpg" alt="매거진" />
   </header>
 
+  <!-- HERO -->
   <div class="hero-swipe">
     <div class="hero-swipe__track">
       <img src="assets2/hero-a.jpg" alt="" />
@@ -28,49 +28,113 @@
     <img class="hero-swipe__title" src="assets2/hero-title.png" alt="THE ORIGINAL CLEANSE" />
   </div>
   <img class="hero-panel" src="assets2/hero-panel.png" alt="GREEN MONSTER · HOLLYWOOD 48-HOUR" />
-  <img src="assets2/s1.jpg" alt="" />
 
-  <div class="photo-fade">
-    <img src="assets2/d2-1.jpg" alt="" />
-    <img src="assets2/d2-2.jpg" alt="" />
-    <img src="assets2/d2-3.jpg" alt="" />
-  </div>
-  <img src="assets2/s2.jpg" alt="" />
+  <!-- 03 Summer Essential -->
+  <img src="assets2/r03.jpg" alt="" />
+  <!-- 04 Benefit -->
+  <img src="assets2/r04.jpg" alt="" />
+  <!-- 05 Chapter 01 title -->
+  <img src="assets2/r05.jpg" alt="" />
 
-  <div class="photo-fade">
-    <img src="assets2/d3-1.jpg" alt="" />
-    <img src="assets2/d3-2.jpg" alt="" />
-    <img src="assets2/d3-3.jpg" alt="" />
+  <!-- 06 스와이프 + 텍스트 -->
+  <div class="swipe">
+    <div class="swipe__track">
+      <img src="assets2/r06-a.jpg" alt="" />
+      <img src="assets2/r06-b.jpg" alt="" />
+    </div>
+    <img class="swipe__overlay" src="assets2/r06-txt.png" alt="" />
   </div>
-  <img src="assets2/s3.jpg" alt="" />
 
-  <div class="photo-fade">
-    <img src="assets2/d4-1.jpg" alt="" />
-    <img src="assets2/d4-2.jpg" alt="" />
-    <img src="assets2/d4-3.jpg" alt="" />
-  </div>
-  <img src="assets2/s4.jpg" alt="" />
+  <!-- 07 Exercise Diet -->
+  <img src="assets2/r07.jpg" alt="" />
 
-  <div class="photo-fade">
-    <img src="assets2/d5-1.jpg" alt="" />
-    <img src="assets2/d5-2.jpg" alt="" />
-    <img src="assets2/d5-3.jpg" alt="" />
+  <!-- 08 스와이프 -->
+  <div class="swipe">
+    <div class="swipe__track">
+      <img src="assets2/r08-a.jpg" alt="" />
+      <img src="assets2/r08-b.jpg" alt="" />
+    </div>
   </div>
-  <img src="assets2/s5.jpg" alt="" />
 
-  <div class="photo-fade">
-    <img src="assets2/d6-1.jpg" alt="" />
-    <img src="assets2/d6-2.jpg" alt="" />
-    <img src="assets2/d6-3.jpg" alt="" />
+  <!-- 09 사진+텍스트(고정) -->
+  <div class="static-txt">
+    <img src="assets2/r09.png" alt="" />
+    <img src="assets2/r09-txt.png" alt="" />
   </div>
-  <img src="assets2/s6.jpg" alt="" />
 
-  <div class="photo-fade">
-    <img src="assets2/d7-1.jpg" alt="" />
-    <img src="assets2/d7-2.jpg" alt="" />
-    <img src="assets2/d7-3.jpg" alt="" />
+  <!-- 10 Chapter 02 title -->
+  <img src="assets2/r10.jpg" alt="" />
+
+  <!-- 11 사진+텍스트(고정) -->
+  <div class="static-txt">
+    <img src="assets2/r11.png" alt="" />
+    <img src="assets2/r11-txt.png" alt="" />
   </div>
-  <img src="assets2/s7.jpg" alt="" />
+
+  <!-- 12 크로스페이드 x3 -->
+  <div class="photo-fade">
+    <img src="assets2/r12-a.jpg" alt="" />
+    <img src="assets2/r12-b.jpg" alt="" />
+    <img src="assets2/r12-c.jpg" alt="" />
+  </div>
+
+  <!-- 13 사진+텍스트(고정) -->
+  <div class="static-txt">
+    <img src="assets2/r13.png" alt="" />
+    <img src="assets2/r13-txt.png" alt="" />
+  </div>
+
+  <!-- 14 essential oil -->
+  <img src="assets2/r14.jpg" alt="" />
+
+  <!-- 15 사진+텍스트(고정) -->
+  <div class="static-txt">
+    <img src="assets2/r15.png" alt="" />
+    <img src="assets2/r15-txt.png" alt="" />
+  </div>
+
+  <!-- 16 가격 -->
+  <img src="assets2/r16.jpg" alt="" />
+
+  <!-- 17 스와이프 (How to Drink) -->
+  <div class="swipe">
+    <div class="swipe__track">
+      <img src="assets2/r17-a.jpg" alt="" />
+      <img src="assets2/r17-b.png" alt="" />
+    </div>
+  </div>
+
+  <!-- 18 Light/Basic 스케줄 -->
+  <img src="assets2/r18.jpg" alt="" />
+  <!-- 19 붓는 사진 -->
+  <img src="assets2/r19.jpg" alt="" />
+
+  <!-- 20 스와이프 -->
+  <div class="swipe">
+    <div class="swipe__track">
+      <img src="assets2/r20-a.jpg" alt="" />
+      <img src="assets2/r20-b.png" alt="" />
+    </div>
+  </div>
+
+  <!-- 21 Chapter 03 title -->
+  <img src="assets2/r21.jpg" alt="" />
+
+  <!-- 22 크로스페이드 x3 -->
+  <div class="photo-fade">
+    <img src="assets2/r22-a.jpg" alt="" />
+    <img src="assets2/r22-b.png" alt="" />
+    <img src="assets2/r22-c.png" alt="" />
+  </div>
+
+  <!-- 23 제품 다발 사진 -->
+  <img src="assets2/r23.jpg" alt="" />
+  <!-- 24 가격 -->
+  <img src="assets2/r24.jpg" alt="" />
+  <!-- 25 Brand Shop -->
+  <img src="assets2/r25.jpg" alt="" />
+  <!-- 26 크레딧/푸터 -->
+  <img src="assets2/r26.jpg" alt="" />
 
 </main>
 </body>
