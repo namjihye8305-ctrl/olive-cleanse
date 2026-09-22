@@ -109,6 +109,7 @@ img{ display:block; width:100%; }
 /* ---- 18: 주스 아이콘 12개가 없다가 순서대로 하나씩 나타남 (무한반복) ---- */
 .glass-wrap{ position:relative; width:100%; }
 .glass-icon{ position:absolute; display:block; opacity:0; transform:scale(.5); transform-origin:center bottom; }
+.day-badge{ position:absolute; display:block; z-index:2; }
 
 @keyframes glassPop0{
   0.00%{ opacity:0; transform:scale(.5); }
@@ -207,16 +208,6 @@ img{ display:block; width:100%; }
 .glass-icon-10{ animation:glassPop10 4.6s linear infinite; }
 .glass-icon-11{ animation:glassPop11 4.6s linear infinite; }
 
-/* ---- 스크롤로 들어오면: 아래→위 등장(1회) 후 두 이미지 페이드인아웃 반복 (js/reveal.js 가 .is-in 토글) ---- */
-.rise-fade{ position:relative; width:100%; overflow:hidden; }
-.rise-fade img{
-  width:100%; display:block; opacity:0; transform:translateY(100px);
-  transition:opacity 1s cubic-bezier(.16,.84,.34,1), transform 1s cubic-bezier(.16,.84,.34,1);
-}
-.rise-fade img:last-child{ position:absolute; inset:0; }
-.rise-fade.is-in img{ transform:translateY(0); }
-.rise-fade.is-in img:first-child{ opacity:1; animation:fadeAB1 6s linear .8s infinite; }
-.rise-fade.is-in img:last-child{ animation:fadeAB2 6s linear .8s infinite; }
 @keyframes fadeAB1{ 0%{ opacity:1; } 40%{ opacity:1; } 50%{ opacity:0; } 90%{ opacity:0; } 100%{ opacity:1; } }
 @keyframes fadeAB2{ 0%{ opacity:0; } 40%{ opacity:0; } 50%{ opacity:1; } 90%{ opacity:1; } 100%{ opacity:0; } }
 
@@ -227,8 +218,5 @@ img{ display:block; width:100%; }
   .fade2 img:last-child{ opacity:0 !important; }
   .hero-swipe__title{ animation:none !important; opacity:1 !important; transform:none !important; }
   .reveal-txt{ transition:none !important; opacity:1 !important; transform:none !important; }
-  .rise-fade img{ transition:none !important; opacity:1 !important; transform:none !important; }
-  .rise-fade.is-in img:first-child,.rise-fade.is-in img:last-child{ animation:none !important; }
-  .rise-fade img:last-child{ opacity:0 !important; }
   .glass-icon{ animation:none !important; opacity:1 !important; transform:scale(1) !important; }
 }

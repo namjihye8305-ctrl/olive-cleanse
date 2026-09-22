@@ -1,7 +1,7 @@
-/* 스크롤 등장 모션(.reveal-txt, .rise-fade): 뷰에 들어오면 .is-in 추가, 한 번만 재생 */
+/* 스크롤 등장 모션(.reveal-txt): 뷰에 들어오면 .is-in 추가, 한 번만 재생 */
 (function () {
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var items = document.querySelectorAll('.reveal-txt, .rise-fade');
+  var items = document.querySelectorAll('.reveal-txt');
   if (!items.length) return;
 
   if (reduce || !('IntersectionObserver' in window)) {
@@ -42,7 +42,20 @@
   }
 
   var ZOOM_FROM = 1, ZOOM_TO = 1.22;
-  var SLIDE_SPEEDUP = 2.6; // 클수록 더 적게 스크롤해도 끝까지 슬라이드됨
+
+  /* 20번: 이미지가 화면 정중앙에 오기 전까지는 0, 정중앙을 지나는 시점부터
+     자기 높이(SLIDE_DIST_RATIO 배)만큼 더 스크롤하는 동안 스와이프 진행 */
+  var SLIDE_DIST_RATIO = 0.6;
+
+  function slideProgress(el) {
+    var rect = el.getBoundingClientRect();
+    var vh = window.innerHeight;
+    var elCenter = rect.top + rect.height / 2;
+    var viewCenter = vh / 2;
+    var dist = rect.height * SLIDE_DIST_RATIO;
+    var p = (viewCenter - elCenter) / dist;
+    return Math.max(0, Math.min(1, p));
+  }
 
   function update() {
     zooms.forEach(function (z) {
@@ -51,10 +64,7 @@
       z.img.style.transform = 'scale(' + scale.toFixed(4) + ')';
     });
     slides.forEach(function (s) {
-      var rect = s.el.getBoundingClientRect();
-      var vh = window.innerHeight;
-      var fastTotal = (vh + rect.height) / SLIDE_SPEEDUP;
-      var p = progressOf(s.el, fastTotal);
+      var p = slideProgress(s.el);
       s.track.style.transform = 'translateX(' + (-50 * p).toFixed(2) + '%)';
     });
   }
