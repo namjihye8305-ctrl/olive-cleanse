@@ -10,6 +10,10 @@ img{ display:block; width:100%; }
 
 .canvas{ width:750px; max-width:100%; margin-inline:auto; background:#fff; overflow:hidden; position:relative; }
 
+/* ---- 앱 상단바 ---- */
+.topbar{ position:sticky; top:0; z-index:20; background:rgba(255,255,255,.92); backdrop-filter:blur(8px); }
+.topbar img{ display:block; width:100%; height:auto; }
+
 /* ---- 영역별 3장 자동 크로스페이드 (motion) ---- */
 .photo-fade{ position:relative; width:100%; overflow:hidden; }
 .photo-fade img{ width:100%; display:block; }
