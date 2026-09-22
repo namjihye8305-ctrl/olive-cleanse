@@ -36,10 +36,7 @@
   var blurs = [].slice.call(document.querySelectorAll('.blur-scrub')).map(function (el) {
     return { el: el };
   });
-  var blurGrows = [].slice.call(document.querySelectorAll('.blur-grow')).map(function (el) {
-    return { el: el };
-  });
-  if (!zooms.length && !slides.length && !blurs.length && !blurGrows.length) return;
+  if (!zooms.length && !slides.length && !blurs.length) return;
 
   function progressOf(el, totalOverride) {
     var rect = el.getBoundingClientRect();
@@ -68,10 +65,6 @@
       var raw = progressOf(b.el);
       var p = Math.min(1, raw / 0.35); // 화면에 들어오고 나서 얼마 안 가 바로 또렷해짐
       b.el.style.filter = 'blur(' + (MAX_BLUR * (1 - p)).toFixed(2) + 'px)';
-    });
-    blurGrows.forEach(function (b) {
-      var p = progressOf(b.el); // 스크롤될수록(화면에서 위로 지나갈수록) 점점 블러
-      b.el.style.filter = 'blur(' + (MAX_BLUR * p).toFixed(2) + 'px)';
     });
   }
 

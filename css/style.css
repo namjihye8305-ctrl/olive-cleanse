@@ -109,10 +109,6 @@ img{ display:block; width:100%; }
 /* 19: 스크롤할수록 블러 → 선명 */
 .blur-scrub{ filter:blur(18px); will-change:filter; }
 
-/* 03: 스크롤할수록 선명(원본) → 블러 + 확대 (반대 방향) */
-.blur-grow{ filter:blur(0px); will-change:filter; }
-.blur-grow img{ will-change:transform,filter; }
-
 /* ---- 18: 주스 아이콘 12개가 없다가 순서대로 하나씩 나타남 (무한반복) ---- */
 .glass-wrap{ position:relative; width:100%; }
 .glass-icon{ position:absolute; display:block; opacity:0; transform:scale(.5); transform-origin:center bottom; }
@@ -241,5 +237,5 @@ img{ display:block; width:100%; }
   .rise-fade.is-in img:first-child,.rise-fade.is-in img:last-child{ animation:none !important; }
   .rise-fade img:last-child{ opacity:0 !important; }
   .glass-icon{ animation:none !important; opacity:1 !important; transform:scale(1) !important; }
-  .blur-scrub,.blur-grow{ filter:none !important; }
+  .blur-scrub{ filter:none !important; }
 }
