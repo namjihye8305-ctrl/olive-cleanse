@@ -55,9 +55,9 @@ img{ display:block; width:100%; }
   position:absolute; inset:0; width:100%; z-index:3; pointer-events:none;
 }
 
-/* ---- 히어로 전용 스와이프: 더 빠르고 부드럽게 ---- */
+/* ---- 히어로 전용 스와이프: 살짝 여유있게, 부드럽게 ---- */
 .hero-swipe{ position:relative; width:100%; overflow:hidden; }
-.hero-swipe__track{ display:flex; width:200%; animation:heroSwipeCycle 3.4s cubic-bezier(.45,0,.15,1) infinite; }
+.hero-swipe__track{ display:flex; width:200%; animation:heroSwipeCycle 4.6s cubic-bezier(.45,0,.15,1) infinite; }
 .hero-swipe__track img{ width:50%; flex:none; display:block; }
 
 @keyframes heroSwipeCycle{
@@ -70,8 +70,8 @@ img{ display:block; width:100%; }
 
 .hero-swipe__title{
   position:absolute; inset:0; width:100%; z-index:3; pointer-events:none;
-  opacity:0; transform:translateY(50px);
-  animation:heroTitleRise .8s cubic-bezier(.16,.84,.34,1) .2s forwards;
+  opacity:0; transform:translateY(90px);
+  animation:heroTitleRise 1s cubic-bezier(.16,.84,.34,1) .2s forwards;
 }
 @keyframes heroTitleRise{ to{ opacity:1; transform:translateY(0); } }
 
@@ -82,15 +82,12 @@ img{ display:block; width:100%; }
 .static-txt{ position:relative; width:100%; }
 .static-txt > *:last-child{ position:absolute; inset:0; width:100%; }
 
-/* 텍스트 오버레이 스크롤 등장 모션 (js/reveal.js 가 .is-in 토글) */
-.reveal-txt{ opacity:0; transform:translateY(30px); transition:opacity .7s cubic-bezier(.16,.84,.34,1), transform .7s cubic-bezier(.16,.84,.34,1); }
-.reveal-txt.is-in{ opacity:1; transform:translateY(0); }
-
-/* ---- 세로 무한 스크롤 텍스트 (제자리에서 텍스트만 위로 흐름) ---- */
-.marquee-v{ position:absolute; inset:0; overflow:hidden; }
-.marquee-v__track{ display:flex; flex-direction:column; width:100%; animation:marqueeUp 14s linear infinite; }
-.marquee-v__track img{ width:100%; display:block; flex:none; }
-@keyframes marqueeUp{ 0%{ transform:translateY(0); } 100%{ transform:translateY(-50%); } }
+/* 텍스트 오버레이 스크롤 등장 모션 (js/reveal.js 가 .is-in 토글) — 방향별로 교차 사용 */
+.reveal-txt{ opacity:0; transition:opacity 1s cubic-bezier(.16,.84,.34,1), transform 1s cubic-bezier(.16,.84,.34,1); }
+.reveal-txt{ transform:translateY(70px); }                 /* 기본: 아래→위 */
+.reveal-txt.dir-left{ transform:translateX(-90px); }        /* 왼쪽→오른쪽 */
+.reveal-txt.dir-right{ transform:translateX(90px); }        /* 오른쪽→왼쪽 */
+.reveal-txt.is-in{ opacity:1; transform:none; }
 
 /* ---- 가로 무한 스크롤 (2장 반복) ---- */
 .marquee-h{ position:relative; width:100%; overflow:hidden; }
@@ -101,8 +98,8 @@ img{ display:block; width:100%; }
 /* ---- 스크롤로 들어오면: 아래→위 등장(1회) 후 두 이미지 페이드인아웃 반복 (js/reveal.js 가 .is-in 토글) ---- */
 .rise-fade{
   position:relative; width:100%; overflow:hidden;
-  opacity:0; transform:translateY(60px);
-  transition:opacity .8s cubic-bezier(.16,.84,.34,1), transform .8s cubic-bezier(.16,.84,.34,1);
+  opacity:0; transform:translateY(100px);
+  transition:opacity 1s cubic-bezier(.16,.84,.34,1), transform 1s cubic-bezier(.16,.84,.34,1);
 }
 .rise-fade.is-in{ opacity:1; transform:translateY(0); }
 .rise-fade img{ width:100%; display:block; }
@@ -113,7 +110,7 @@ img{ display:block; width:100%; }
 @keyframes fadeAB2{ 0%{ opacity:0; } 40%{ opacity:0; } 50%{ opacity:1; } 90%{ opacity:1; } 100%{ opacity:0; } }
 
 @media (prefers-reduced-motion: reduce){
-  .hero-swipe__track,.swipe__track,.marquee-v__track,.marquee-h__track{ animation:none !important; }
+  .hero-swipe__track,.swipe__track,.marquee-h__track{ animation:none !important; }
   .hero-swipe__title{ animation:none !important; opacity:1 !important; transform:none !important; }
   .reveal-txt{ transition:none !important; opacity:1 !important; transform:none !important; }
   .rise-fade{ transition:none !important; opacity:1 !important; transform:none !important; }
