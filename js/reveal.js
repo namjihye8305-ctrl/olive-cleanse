@@ -13,7 +13,7 @@
     entries.forEach(function (entry) {
       if (!entry.isIntersecting) return;
       var el = entry.target;
-      var delay = el.classList.contains('rise-fade') ? 350 : 0;
+      var delay = el.classList.contains('rise-fade') ? 350 : 300;
       setTimeout(function () { el.classList.add('is-in'); }, delay);
       io.unobserve(el);
     });
