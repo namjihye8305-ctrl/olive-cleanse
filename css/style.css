@@ -102,7 +102,7 @@ img{ display:block; width:100%; }
 .pulse-btn{ position:absolute; display:block; border-radius:4px; animation:pulseBtn 1.8s ease-in-out infinite; }
 @keyframes pulseBtn{
   0%,100%{ transform:scale(1); }
-  50%{ transform:scale(1.04); }
+  50%{ transform:scale(1.06); }
 }
 .static-txt > *:last-child{ position:absolute; inset:0; width:100%; }
 
