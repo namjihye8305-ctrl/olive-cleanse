@@ -18,7 +18,7 @@ img{ display:block; width:100%; }
 .photo-fade{ position:relative; width:100%; overflow:hidden; }
 .photo-fade img{ width:100%; display:block; }
 .photo-fade img:not(:first-child){ position:absolute; top:0; left:0; }
-.photo-fade img{ animation-duration:5.5s; animation-timing-function:linear; animation-iteration-count:infinite; }
+.photo-fade img{ animation-duration:3.8s; animation-timing-function:linear; animation-iteration-count:infinite; }
 .photo-fade img:nth-child(1){ animation-name:fadeCycle1; }
 .photo-fade img:nth-child(2){ animation-name:fadeCycle2; }
 .photo-fade img:nth-child(3){ animation-name:fadeCycle3; }
@@ -59,8 +59,8 @@ img{ display:block; width:100%; }
 .fade2{ position:relative; width:100%; overflow:hidden; margin-top:-1px; }
 .fade2 img{ width:100%; display:block; }
 .fade2 img:last-child{ position:absolute; inset:0; }
-.fade2 img:first-child{ animation:fadeAB1 6s linear infinite; }
-.fade2 img:last-child{ animation:fadeAB2 6s linear infinite; }
+.fade2 img:first-child{ animation:fadeAB1 4s linear infinite; }
+.fade2 img:last-child{ animation:fadeAB2 4s linear infinite; }
 
 /* ---- 히어로 전용 스와이프: 살짝 여유있게, 부드럽게 ---- */
 .hero-swipe{ position:relative; width:100%; overflow:hidden; }
@@ -91,11 +91,18 @@ img{ display:block; width:100%; }
 /* ---- 사진 1장 + 자유 위치 오버레이 (좌표는 inline style로 직접 지정) ---- */
 .ovl-wrap{ position:relative; width:100%; }
 
+/* mo_02: Brand Week 원형 로고, 왼쪽↔오른쪽 스무스 회전(흔들림) */
+.logo-wobble{ position:absolute; display:block; transform-origin:center center; animation:logoWobble 3.2s ease-in-out infinite; }
+@keyframes logoWobble{
+  0%,100%{ transform:rotate(-10deg); }
+  50%{ transform:rotate(10deg); }
+}
+
 /* mo_04: 다운로드 버튼 강조(맥박처럼 은은하게 커졌다 작아짐 + 은은한 글로우) */
 .pulse-btn{ position:absolute; display:block; border-radius:4px; animation:pulseBtn 1.8s ease-in-out infinite; }
 @keyframes pulseBtn{
-  0%,100%{ transform:scale(1); box-shadow:0 0 0 0 rgba(255,255,255,0); }
-  50%{ transform:scale(1.12); box-shadow:0 0 14px 4px rgba(20,200,190,.55); }
+  0%,100%{ transform:scale(1); }
+  50%{ transform:scale(1.04); }
 }
 .static-txt > *:last-child{ position:absolute; inset:0; width:100%; }
 
@@ -250,6 +257,7 @@ img{ display:block; width:100%; }
   .rise-fade.is-in img:first-child,.rise-fade.is-in img:last-child{ animation:none !important; }
   .rise-fade img:last-child{ opacity:0 !important; }
   .glass-icon{ animation:none !important; opacity:1 !important; transform:scale(1) !important; }
-  .pulse-btn{ animation:none !important; transform:scale(1) !important; box-shadow:none !important; }
+  .pulse-btn{ animation:none !important; transform:scale(1) !important; }
+  .logo-wobble{ animation:none !important; transform:none !important; }
   .blur-scrub{ filter:none !important; }
 }
