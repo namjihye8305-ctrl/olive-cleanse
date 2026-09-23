@@ -92,7 +92,7 @@ img{ display:block; width:100%; }
 .ovl-wrap{ position:relative; width:100%; }
 
 /* mo_02: Brand Week 원형 로고, 왼쪽↔오른쪽 스무스 회전(흔들림) */
-.logo-wobble{ position:absolute; display:block; transform-origin:center center; animation:logoWobble 2.2s ease-in-out infinite; }
+.logo-wobble{ position:absolute; z-index:6; display:block; transform-origin:center center; animation:logoWobble 2.2s ease-in-out infinite; }
 @keyframes logoWobble{
   0%,100%{ transform:rotate(-18deg); }
   50%{ transform:rotate(18deg); }
