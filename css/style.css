@@ -87,6 +87,9 @@ img{ display:block; width:100%; }
 
 /* ---- 사진 1장 + 텍스트 오버레이 ---- */
 .static-txt{ position:relative; width:100%; }
+
+/* ---- 사진 1장 + 자유 위치 오버레이 (좌표는 inline style로 직접 지정) ---- */
+.ovl-wrap{ position:relative; width:100%; }
 .static-txt > *:last-child{ position:absolute; inset:0; width:100%; }
 
 /* 텍스트 오버레이 스크롤 등장 모션 (js/reveal.js 가 .is-in 토글) — 방향별로 교차 사용 */
