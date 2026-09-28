@@ -86,14 +86,16 @@
   /* 20번 전용: 기존 스크롤 연동은 그대로 두고, 마우스/손가락 드래그로도 스와이프 가능하게 추가 */
   slides.forEach(function (s) {
     var el = s.el, track = s.track;
-    var startX = 0, startPercent = 0;
+    var startX = 0, startPercent = 0, startTime = 0, lastX = 0, lastTime = 0, velocity = 0;
     el.style.touchAction = 'pan-y';
     el.style.cursor = 'grab';
 
     function onDown(e) {
       s.dragging = true;
-      startX = e.clientX;
+      startX = lastX = e.clientX;
       startPercent = s.percent;
+      startTime = lastTime = Date.now();
+      velocity = 0;
       el.style.cursor = 'grabbing';
       track.style.transition = 'none';
       if (el.setPointerCapture) { try { el.setPointerCapture(e.pointerId); } catch (err) {} }
@@ -106,10 +108,29 @@
       p = Math.max(0, Math.min(1, p));
       s.percent = p;
       track.style.transform = 'translateX(' + (-50 * p).toFixed(2) + '%)';
+      var now = Date.now();
+      var dt = now - lastTime;
+      if (dt > 0) velocity = (e.clientX - lastX) / dt; // px per ms
+      lastX = e.clientX; lastTime = now;
     }
     function onUp() {
+      if (!s.dragging) return;
       s.dragging = false;
       el.style.cursor = 'grab';
+      // 스와이프 판정: 일정 거리 이상 이동했거나 빠르게 튕기면(velocity) 이미지가 완전히 전환됨(0 또는 1로 스냅)
+      var movedEnough = Math.abs(s.percent - startPercent) > 0.12;
+      var flicked = Math.abs(velocity) > 0.5; // px/ms
+      var target;
+      if (movedEnough || flicked) {
+        var direction = flicked ? (velocity < 0 ? 1 : 0) : (s.percent > startPercent ? 1 : 0);
+        target = direction;
+      } else {
+        target = startPercent > 0.5 ? 1 : 0;
+      }
+      s.percent = target;
+      track.style.transition = 'transform .32s cubic-bezier(.16,.84,.34,1)';
+      track.style.transform = 'translateX(' + (-50 * target).toFixed(2) + '%)';
+      setTimeout(function () { track.style.transition = 'none'; }, 340);
     }
 
     el.addEventListener('pointerdown', onDown);
