@@ -31,7 +31,7 @@
     return { el: el, img: el.querySelector('img') };
   });
   var slides = [].slice.call(document.querySelectorAll('.scrub-slide')).map(function (el) {
-    return { el: el, track: el.querySelector('.scrub-slide__track') };
+    return { el: el, track: el.querySelector('.scrub-slide__track'), percent: 0, dragging: false };
   });
   var blurs = [].slice.call(document.querySelectorAll('.blur-scrub')).map(function (el) {
     return { el: el };
@@ -59,8 +59,10 @@
       z.img.style.transform = 'scale(' + scale.toFixed(4) + ')';
     });
     slides.forEach(function (s) {
+      if (s.dragging) return; // 드래그 중에는 포인터 핸들러가 직접 위치를 제어
       var raw = progressOf(s.el);
       var p = s.el.classList.contains('slide-late') ? Math.max(0, (raw - 0.35) / 0.65) : raw;
+      s.percent = p;
       s.track.style.transform = 'translateX(' + (-50 * p).toFixed(2) + '%)';
     });
     blurs.forEach(function (b) {
@@ -80,4 +82,40 @@
   window.addEventListener('scroll', onScroll, { passive: true });
   window.addEventListener('resize', onScroll);
   update();
+
+  /* 20번 전용: 기존 스크롤 연동은 그대로 두고, 마우스/손가락 드래그로도 스와이프 가능하게 추가 */
+  slides.forEach(function (s) {
+    var el = s.el, track = s.track;
+    var startX = 0, startPercent = 0;
+    el.style.touchAction = 'pan-y';
+    el.style.cursor = 'grab';
+
+    function onDown(e) {
+      s.dragging = true;
+      startX = e.clientX;
+      startPercent = s.percent;
+      el.style.cursor = 'grabbing';
+      track.style.transition = 'none';
+      if (el.setPointerCapture) { try { el.setPointerCapture(e.pointerId); } catch (err) {} }
+    }
+    function onMove(e) {
+      if (!s.dragging) return;
+      var width = el.getBoundingClientRect().width || 1;
+      var dx = e.clientX - startX;
+      var p = startPercent - dx / width;
+      p = Math.max(0, Math.min(1, p));
+      s.percent = p;
+      track.style.transform = 'translateX(' + (-50 * p).toFixed(2) + '%)';
+    }
+    function onUp() {
+      s.dragging = false;
+      el.style.cursor = 'grab';
+    }
+
+    el.addEventListener('pointerdown', onDown);
+    el.addEventListener('pointermove', onMove);
+    el.addEventListener('pointerup', onUp);
+    el.addEventListener('pointercancel', onUp);
+    el.addEventListener('pointerleave', function () { if (s.dragging) onUp(); });
+  });
 })();
