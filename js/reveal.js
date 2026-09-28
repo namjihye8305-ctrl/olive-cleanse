@@ -86,24 +86,43 @@
   /* 20번 전용: 기존 스크롤 연동은 그대로 두고, 마우스/손가락 드래그로도 스와이프 가능하게 추가 */
   slides.forEach(function (s) {
     var el = s.el, track = s.track;
-    var startX = 0, startPercent = 0, startTime = 0, lastX = 0, lastTime = 0, velocity = 0;
+    var startX = 0, startY = 0, startPercent = 0, lastX = 0, lastTime = 0, velocity = 0;
+    var locked = null; // null=미정, true=가로 드래그로 확정, false=세로 스크롤로 확정(드래그 포기)
     el.style.touchAction = 'pan-y';
     el.style.cursor = 'grab';
 
     function onDown(e) {
       s.dragging = true;
+      locked = null;
       startX = lastX = e.clientX;
+      startY = e.clientY;
       startPercent = s.percent;
-      startTime = lastTime = Date.now();
+      lastTime = Date.now();
       velocity = 0;
       el.style.cursor = 'grabbing';
       track.style.transition = 'none';
-      if (el.setPointerCapture) { try { el.setPointerCapture(e.pointerId); } catch (err) {} }
     }
     function onMove(e) {
       if (!s.dragging) return;
-      var width = el.getBoundingClientRect().width || 1;
       var dx = e.clientX - startX;
+      var dy = e.clientY - startY;
+
+      if (locked === null) {
+        if (Math.abs(dx) < 6 && Math.abs(dy) < 6) return; // 방향 판단하기엔 아직 이동량 부족
+        if (Math.abs(dy) > Math.abs(dx)) {
+          // 세로 움직임이 더 크면 스크롤 의도 -> 드래그 포기하고 네이티브 스크롤에 맡김
+          locked = false;
+          s.dragging = false;
+          el.style.cursor = 'grab';
+          return;
+        }
+        locked = true;
+        if (el.setPointerCapture) { try { el.setPointerCapture(e.pointerId); } catch (err) {} }
+      }
+      if (locked !== true) return;
+      e.preventDefault(); // 가로 드래그로 확정된 뒤엔 페이지가 같이 스크롤되지 않게 막음
+
+      var width = el.getBoundingClientRect().width || 1;
       var p = startPercent - dx / width;
       p = Math.max(0, Math.min(1, p));
       s.percent = p;
@@ -117,6 +136,7 @@
       if (!s.dragging) return;
       s.dragging = false;
       el.style.cursor = 'grab';
+      if (locked !== true) return; // 세로 스크롤로 판정된 제스처는 스냅 처리하지 않음
       // 스와이프 판정: 일정 거리 이상 이동했거나 빠르게 튕기면(velocity) 이미지가 완전히 전환됨(0 또는 1로 스냅)
       var movedEnough = Math.abs(s.percent - startPercent) > 0.12;
       var flicked = Math.abs(velocity) > 0.5; // px/ms
@@ -134,9 +154,9 @@
     }
 
     el.addEventListener('pointerdown', onDown);
-    el.addEventListener('pointermove', onMove);
+    el.addEventListener('pointermove', onMove, { passive: false });
     el.addEventListener('pointerup', onUp);
     el.addEventListener('pointercancel', onUp);
-    el.addEventListener('pointerleave', function () { if (s.dragging) onUp(); });
+    el.addEventListener('pointerleave', function () { if (s.dragging && locked !== true) onUp(); });
   });
 })();
