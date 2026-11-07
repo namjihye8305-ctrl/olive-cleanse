@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SUNLIT · A SIP OF SUMMER | Summer Editorial</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <!-- 이미지 교체본 전용: 기존 사진에 합쳐져 있던 문구(r08, r20-a)를 같은 위치에 텍스트 레이어로 복원 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800&display=swap" />
+  <style>
+    :root{ --u: calc(min(100vw, 750px) / 750); }
+    .swap-txt-wrap{ position:relative; }
+    .swap-txt{ position:absolute; z-index:3; margin:0; color:#fff; font-family:"Pretendard", system-ui, sans-serif; pointer-events:none;
+      text-shadow:0 1px calc(var(--u)*5) rgba(0,0,0,.22); letter-spacing:-.01em; }
+    .swap-txt--r08{ top:calc(var(--u)*75); right:calc(var(--u)*56); text-align:right; font-size:calc(var(--u)*26); line-height:calc(var(--u)*48); font-weight:400; white-space:nowrap; }
+    .scrub-slide__track{ position:relative; }
+    .swap-link{ position:absolute; z-index:4; display:block; }
+    .swap-link:focus-visible{ outline:3px solid #ff7a1a; outline-offset:2px; }
+    .swap-txt--r20{ left:calc(var(--u)*51); bottom:calc(var(--u)*77); width:calc(50% - var(--u)*102); font-size:calc(var(--u)*27); line-height:calc(var(--u)*38); font-weight:400; white-space:nowrap; }
+    .swap-txt--r20 strong{ display:block; margin-bottom:calc(var(--u)*12); font-family:"Montserrat", "Pretendard", sans-serif; font-size:calc(var(--u)*38); line-height:calc(var(--u)*46); font-weight:800; letter-spacing:0; }
+    /* 교체본 전용: 사진 전환 시 두 장이 반투명하게 겹치지 않도록 (아래 장은 불투명 유지, 위 장만 페이드) */
+    .photo-fade img:nth-child(1){ animation-name:swapFade1; }
+    .photo-fade img:nth-child(2){ animation-name:swapFade2; }
+    .photo-fade img:nth-child(3){ animation-name:swapFade3; }
+    @keyframes swapFade1{ 0%,33.2%{ opacity:1; } 33.3%,99.9%{ opacity:0; } 100%{ opacity:1; } }
+    @keyframes swapFade2{ 0%,33.2%{ opacity:0; } 33.3%,66.6%{ opacity:1; } 66.7%,100%{ opacity:0; } }
+    @keyframes swapFade3{ 0%,66.6%{ opacity:0; } 66.7%,99.9%{ opacity:1; } 100%{ opacity:0; } }
+    /* + 버튼 상품 정보 팝업 */
+    .prod-hot{ position:absolute; z-index:4; padding:0; border:0; background:transparent; cursor:pointer; }
+    .prod-hot:focus-visible{ outline:3px solid #ff6a00; outline-offset:2px; }
+    .prod-pop{ position:fixed; inset:0; z-index:50; display:none; align-items:flex-end; justify-content:center; background:rgba(0,0,0,.45); }
+    .prod-pop.is-open{ display:flex; }
+    .prod-pop__box{ position:relative; width:100%; max-width:750px; background:#fff; border-radius:calc(var(--u)*24) calc(var(--u)*24) 0 0; padding:calc(var(--u)*48) calc(var(--u)*44) calc(var(--u)*44); font-family:"Pretendard", system-ui, sans-serif; color:#1f2a30; animation:prodUp .28s cubic-bezier(.16,.84,.34,1); }
+    @keyframes prodUp{ from{ transform:translateY(40px); opacity:0; } to{ transform:none; opacity:1; } }
+    .prod-pop__x{ position:absolute; top:calc(var(--u)*24); right:calc(var(--u)*24); width:calc(var(--u)*56); height:calc(var(--u)*56); border:0; background:none; font-size:calc(var(--u)*40); line-height:1; color:#555; cursor:pointer; }
+    .prod-pop__row{ display:flex; gap:calc(var(--u)*28); align-items:center; }
+    .prod-pop__img{ width:calc(var(--u)*190); height:calc(var(--u)*190); border-radius:calc(var(--u)*12); object-fit:cover; flex:none; background:#f4f4f4; }
+    .prod-pop__tag{ display:inline-block; margin-bottom:calc(var(--u)*10); padding:calc(var(--u)*5) calc(var(--u)*12); border-radius:calc(var(--u)*4); background:#fff1e6; color:#ff6a00; font-size:calc(var(--u)*20); font-weight:700; }
+    .prod-pop__name{ margin:0; font-size:calc(var(--u)*34); font-weight:700; }
+    .prod-pop__sub{ margin:calc(var(--u)*6) 0 calc(var(--u)*14); font-size:calc(var(--u)*25); color:#555; }
+    .prod-pop__price{ margin:0; font-size:calc(var(--u)*32); font-weight:700; }
+    .prod-pop__price s{ margin-left:calc(var(--u)*8); font-size:calc(var(--u)*22); font-weight:400; color:#999; }
+    .prod-pop__price em{ font-style:normal; color:#ff6a00; margin-right:calc(var(--u)*8); }
+    .prod-pop__spec{ margin:calc(var(--u)*32) 0; padding:calc(var(--u)*24) 0 0; border-top:1px solid #eee; display:grid; grid-template-columns:auto 1fr; gap:calc(var(--u)*12) calc(var(--u)*24); font-size:calc(var(--u)*24); }
+    .prod-pop__spec dt{ color:#999; } .prod-pop__spec dd{ margin:0; }
+    .prod-pop__cta{ display:flex; gap:calc(var(--u)*14); }
+    .prod-pop__cta button{ flex:1; border-radius:calc(var(--u)*6); padding:calc(var(--u)*26) 0; font:600 calc(var(--u)*27)/1 "Pretendard", system-ui, sans-serif; cursor:pointer; }
+    .prod-pop__cart{ border:1px solid #ff6a00; background:#fff; color:#ff6a00; }
+    .prod-pop__buy{ border:0; background:#ff6a00; color:#fff; }
+    /* 쿠폰 다운로드 안내 팝업 */
+    .pulse-btn{ cursor:pointer; }
+    .coupon-pop{ position:fixed; inset:0; z-index:50; display:none; align-items:center; justify-content:center; padding:0 calc(var(--u)*60); background:rgba(0,0,0,.45); }
+    .coupon-pop.is-open{ display:flex; }
+    .coupon-pop__box{ width:100%; max-width:calc(var(--u)*560); background:#fff; border-radius:calc(var(--u)*16); padding:calc(var(--u)*56) calc(var(--u)*40) calc(var(--u)*40); text-align:center; font-family:"Pretendard", system-ui, sans-serif; box-shadow:0 calc(var(--u)*12) calc(var(--u)*40) rgba(0,0,0,.18); }
+    .coupon-pop__msg{ margin:0 0 calc(var(--u)*40); font-size:calc(var(--u)*30); font-weight:600; color:#1f2a30; letter-spacing:-.02em; line-height:1.45; }
+    .coupon-pop__ok{ display:block; width:100%; border:0; border-radius:calc(var(--u)*6); background:#ff6a00; color:#fff; font:600 calc(var(--u)*28)/1 "Pretendard", system-ui, sans-serif; padding:calc(var(--u)*26) 0; cursor:pointer; }
+    .coupon-pop__ok:focus-visible{ outline:3px solid #1f2a30; outline-offset:2px; }
+  </style>
+</head>
+<body>
+<!-- ================================================================
+     Mobile 750px 에디토리얼 · 새 디자인(코딩/images) 전체 반영
+     * .hero-swipe / .swipe  = 2장 좌우 자동 스와이프 (+ 타이틀/텍스트 오버레이)
+     * .photo-fade           = 3장 자동 크로스페이드
+     * .static-txt           = 사진 1장 + 텍스트 오버레이 (모션 없음)
+     ================================================================ -->
+<main class="canvas" id="top">
+
+  <header class="topbar">
+    <img src="assets2/gnb.jpg" alt="매거진" />
+  </header>
+
+  <!-- HERO -->
+  <div class="hero-swipe">
+    <div class="hero-swipe__track">
+      <img src="assets/sunlit-copy/hero-a.jpg" alt="" />
+      <img src="assets/sunlit-copy/hero-b.jpg" alt="" />
+    </div>
+    <img class="hero-swipe__title" src="assets/sunlit-orange/hero-title.png" alt="THE ORIGINAL CLEANSE" />
+  </div>
+  <div class="ovl-wrap" id="about">
+    <img class="hero-panel" src="assets/sunlit-orange/hero-panel.png" alt="SUNLIT SUMMER · MANGO + CITRUS EDITION" />
+    <img class="logo-wobble" style="top:-0.128%; left:75.733%; width:19.33%;" src="assets2/brand-logo.png" alt="Brand Week" />
+  </div>
+
+  <!-- 03 Summer Essential -->
+  <div class="static-txt">
+    <img src="assets/sunlit-swap/r03.jpg" alt="" />
+    <img class="reveal-txt" src="assets/sunlit-orange/r03-text.png" alt="" />
+  </div>
+  <!-- 04 Benefit -->
+  <div class="ovl-wrap">
+    <img src="assets/sunlit-orange/r04.jpg" alt="" />
+    <img class="pulse-btn" style="top:31.38%; left:81.6%; width:5.867%;" src="assets2/r04-btn.png" alt="쿠폰 다운로드" role="button" tabindex="0" />
+  </div>
+  <!-- 05 Chapter 01 title -->
+  <img src="assets/sunlit-orange/r05.jpg" alt="" />
+
+  <!-- 06 스와이프 + 텍스트 -->
+  <div class="swipe">
+    <div class="swipe__track">
+      <img src="assets/sunlit-swap/r06-a.jpg" alt="" />
+      <img src="assets/sunlit-copy/r06-b.jpg" alt="" />
+    </div>
+    <img class="swipe__overlay reveal-txt" style="top:0;" src="assets/sunlit-orange/r06-txt-top.png" alt="" />
+    <img class="swipe__overlay reveal-txt dir-left" style="top:54.27%;" src="assets/sunlit-orange/r06-txt-bottom.png" alt="" />
+  </div>
+
+  <!-- 07 Exercise Diet -->
+  <div class="ovl-wrap" style="overflow:hidden;">
+    <img src="assets/sunlit-orange/r07.jpg" alt="" />
+    <img class="reveal-txt dir-right" style="position:absolute; top:28.5%; left:47%; width:48.4%;" src="assets/sunlit-orange/r07-cutout.png" alt="수건을 어깨에 걸치고 SUNLIT과 과일이 담긴 망사가방을 든 모델" />
+    <img class="reveal-txt" style="position:absolute; top:0; left:0; width:100%; pointer-events:none; z-index:2;" src="assets/sunlit-orange/r07-hand.png" alt="" />
+  </div>
+
+  <!-- 08 페이드인아웃 -->
+  <div class="swap-txt-wrap">
+    <div class="fade2">
+      <img src="assets/sunlit-swap/r08-a.jpg" alt="" />
+      <img src="assets/sunlit-swap/r08-b.jpg" alt="" />
+    </div>
+    <p class="swap-txt swap-txt--r08">햇살 아래 잠시 숨을 고르는 오후, 시원한 한 모금으로<br />여름의 쉼표를 산뜻하게 채워요.</p>
+  </div>
+
+  <!-- 09 사진+텍스트(고정) -->
+  <div class="static-txt">
+    <img src="assets/sunlit-orange/r09.png" alt="" />
+    <img class="reveal-txt dir-left" src="assets/sunlit-orange/r09-txt.png" alt="" />
+  </div>
+
+  <!-- 10 Chapter 02 title -->
+  <img src="assets/sunlit-orange/r10.jpg" alt="" />
+
+  <!-- 11 사진+텍스트(고정) -->
+  <div class="static-txt">
+    <img src="assets/sunlit-copy/r11.png" alt="" />
+    <img class="reveal-txt dir-right" src="assets/sunlit-orange/r11-txt.png" alt="" />
+  </div>
+
+  <!-- 12 크로스페이드 x3 (빠른 속도) -->
+  <div class="photo-fade">
+    <img src="assets/sunlit-orange/r12-a.jpg" alt="" />
+    <img src="assets/sunlit-orange/r12-b.jpg" alt="" />
+    <img src="assets/sunlit-orange/r12-c.jpg" alt="" />
+  </div>
+
+  <!-- 13 사진+텍스트(고정) -->
+  <div class="static-txt">
+    <img src="assets/sunlit-copy/r13.jpg" alt="" />
+    <img class="reveal-txt" src="assets/sunlit-orange/r13-txt.png" alt="" />
+  </div>
+
+  <!-- 14 essential oil -->
+  <div class="static-txt">
+    <img src="assets/sunlit-copy/r14.jpg" alt="" />
+    <img class="reveal-txt" src="assets/sunlit-copy/r14-text.png" alt="" />
+  </div>
+
+  <!-- 15 사진 + 텍스트(왼쪽→오른쪽 등장) -->
+  <div class="static-txt">
+    <img src="assets/sunlit-orange/r15.png" alt="" />
+    <button type="button" class="prod-hot" data-prod="a" style="left:70.933%;top:20.753%;width:5.333%;height:3.861%;" aria-label="상품 정보 보기"></button>
+    <img class="reveal-txt dir-left" src="assets/sunlit-orange/r15-txt.png" alt="" />
+  </div>
+
+  <!-- 16 가격 -->
+  <img src="assets/sunlit-orange/r16.jpg" alt="" />
+
+  <!-- 17 기본 배경 위에 스크롤 시 아래→위로 등장 후 페이드인아웃 (How to Drink) -->
+  <div class="rise-fade">
+    <img class="rf-base" src="assets/sunlit-orange/r17-base.jpg" alt="" />
+    <img class="rf-a" src="assets/sunlit-swap/r17-a.png" alt="" />
+    <img class="rf-b" src="assets/sunlit-swap/r17-b.png" alt="" />
+  </div>
+
+  <!-- 18 Light/Basic 스케줄 : 주스 아이콘 12개가 순서대로 하나씩 나타남(무한반복) -->
+  <div class="glass-wrap">
+    <img src="assets/sunlit-orange/r18.jpg" alt="" />
+    <img class="glass-icon glass-icon-0" style="left:15.333%;top:36.254%;width:6.933%;" src="assets2/glass.png" alt="" />
+    <img class="glass-icon glass-icon-1" style="left:33.2%;top:36.254%;width:6.933%;" src="assets2/glass.png" alt="" />
+    <img class="glass-icon glass-icon-2" style="left:50.933%;top:36.254%;width:6.933%;" src="assets2/glass.png" alt="" />
+    <img class="glass-icon glass-icon-3" style="left:68.8%;top:36.254%;width:6.933%;" src="assets2/glass.png" alt="" />
+    <img class="glass-icon glass-icon-4" style="left:15.333%;top:72.106%;width:6.933%;" src="assets2/glass.png" alt="" />
+    <img class="glass-icon glass-icon-5" style="left:33.2%;top:72.106%;width:6.933%;" src="assets2/glass.png" alt="" />
+    <img class="glass-icon glass-icon-6" style="left:50.933%;top:72.106%;width:6.933%;" src="assets2/glass.png" alt="" />
+    <img class="glass-icon glass-icon-7" style="left:68.8%;top:72.106%;width:6.933%;" src="assets2/glass.png" alt="" />
+    <img class="glass-icon glass-icon-8" style="left:15.333%;top:82.154%;width:6.933%;" src="assets2/glass.png" alt="" />
+    <img class="glass-icon glass-icon-9" style="left:33.2%;top:82.154%;width:6.933%;" src="assets2/glass.png" alt="" />
+    <img class="glass-icon glass-icon-10" style="left:50.933%;top:82.154%;width:6.933%;" src="assets2/glass.png" alt="" />
+    <img class="glass-icon glass-icon-11" style="left:68.8%;top:82.154%;width:6.933%;" src="assets2/glass.png" alt="" />
+    <img class="day-badge" style="left:73.067%;top:36.897%;width:16.667%;" src="assets/sunlit-orange/badge-day1.png" alt="SUNLIT" />
+    <img class="day-badge" style="left:73.067%;top:72.829%;width:16.667%;" src="assets/sunlit-orange/badge-day1.png" alt="SUNLIT" />
+    <img class="day-badge" style="left:73.067%;top:83.039%;width:16.667%;" src="assets/sunlit-copy/badge-day2.png" alt="SUMMER" />
+  </div>
+
+  <!-- 19 붓는 사진 : 스크롤하면 줌인 + 블러→선명 -->
+  <div class="scrub-zoom blur-scrub">
+    <img src="assets/sunlit-copy/r19.jpg" alt="" />
+  </div>
+
+  <!-- 20 : 스크롤하는 동안만 20-1 → 20-2로 슬라이드 -->
+  <div class="scrub-slide slide-view">
+    <div class="scrub-slide__track">
+      <img src="assets/sunlit-orange/r20-a.jpg" alt="" />
+      <img src="assets/sunlit-swap/r20-b.jpg" alt="" />
+      <p class="swap-txt swap-txt--r20"><strong>A Sip of Summer, Anywhere</strong>선베드 위에서도 풀사이드에서도 함께하는 한 병!</p>
+    </div>
+  </div>
+
+  <!-- 21 Chapter 03 title -->
+  <img src="assets/sunlit-orange/r21.jpg" alt="" />
+
+  <!-- 22 크로스페이드 x3 -->
+  <div class="photo-fade">
+    <img src="assets/sunlit-orange/r22-a.jpg" alt="" />
+    <img src="assets/sunlit-orange/r22-b.png" alt="" />
+    <img src="assets/sunlit-orange/r22-c.png" alt="" />
+  </div>
+
+  <!-- 23 제품 다발 사진 -->
+  <div class="ovl-wrap">
+    <img src="assets/sunlit-orange/r23.jpg" alt="" />
+    <button type="button" class="prod-hot" data-prod="b" style="left:9.6%;top:24.745%;width:5.333%;height:5.822%;" aria-label="상품 정보 보기"></button>
+  </div>
+  <!-- 24 가격 -->
+  <img src="assets/sunlit-orange/r24.jpg" alt="" />
+  <!-- 25 Brand Shop -->
+  <div class="ovl-wrap">
+    <img src="assets/sunlit-orange/r25.jpg" alt="" />
+    <a class="swap-link" href="#about" style="left:13.333%;top:83.25%;width:73.333%;height:9.167%;" aria-label="EXPLORE SUNLIT"></a>
+  </div>
+  <!-- 26 크레딧/푸터 -->
+  <div class="ovl-wrap">
+    <img src="assets/sunlit-orange/r26.jpg" alt="SUNLIT SUMMER EDITORIAL · Concept Project · AI-assisted Visuals" />
+    <a class="swap-link" href="#top" style="left:7.467%;top:81.336%;width:33.6%;height:7.949%;" aria-label="처음으로 돌아가기"></a>
+  </div>
+
+</main>
+<div class="coupon-pop" id="couponPop" role="dialog" aria-modal="true" aria-labelledby="couponPopMsg">
+  <div class="coupon-pop__box">
+    <p class="coupon-pop__msg" id="couponPopMsg">로그인 시 다운로드 가능합니다.</p>
+    <button type="button" class="coupon-pop__ok">확인</button>
+  </div>
+</div>
+<div class="prod-pop" id="prodPop" role="dialog" aria-modal="true" aria-labelledby="prodPopName">
+  <div class="prod-pop__box">
+    <button type="button" class="prod-pop__x" aria-label="닫기">&times;</button>
+    <div class="prod-pop__row">
+      <img class="prod-pop__img" src="assets/sunlit-orange/pop-a.jpg" alt="" />
+      <div>
+        <span class="prod-pop__tag">SUMMER EDITION</span>
+        <p class="prod-pop__name" id="prodPopName">SUNLIT</p>
+        <p class="prod-pop__sub">망고 + 시트러스 썸머 에디션</p>
+        <p class="prod-pop__price"><em>20%</em>3,600원<s>4,500원</s></p>
+      </div>
+    </div>
+    <dl class="prod-pop__spec">
+      <dt>맛</dt><dd>Mango + Citrus</dd>
+      <dt>패키지</dt><dd class="prod-pop__pkg">Ivory Bottle · Orange Cap</dd>
+      <dt>추천</dt><dd>얼음 가득한 잔에 따라 시원하게</dd>
+    </dl>
+    <div class="prod-pop__cta">
+      <button type="button" class="prod-pop__cart">장바구니</button>
+      <button type="button" class="prod-pop__buy">바로 구매</button>
+    </div>
+  </div>
+</div>
+<script src="js/reveal-swap.js"></script>
+<script>
+(function(){
+  var pop=document.getElementById('prodPop'), img=pop.querySelector('.prod-pop__img'), pkg=pop.querySelector('.prod-pop__pkg'), x=pop.querySelector('.prod-pop__x'), last=null;
+  var data={ a:{ img:'assets/sunlit-orange/pop-a.jpg', pkg:'Ivory Bottle · Orange Cap' }, b:{ img:'assets/sunlit-orange/pop-b.jpg', pkg:'Bottle + Tumbler Set' } };
+  function open(k){ var d=data[k]||data.a; img.src=d.img; pkg.textContent=d.pkg; last=document.activeElement; pop.classList.add('is-open'); x.focus(); }
+  function close(){ pop.classList.remove('is-open'); if(last&&last.focus) last.focus(); }
+  [].forEach.call(document.querySelectorAll('.prod-hot'),function(b){ b.addEventListener('click',function(){ open(b.getAttribute('data-prod')); }); });
+  x.addEventListener('click',close);
+  pop.addEventListener('click',function(e){ if(e.target===pop) close(); });
+  [].forEach.call(pop.querySelectorAll('.prod-pop__cta button'),function(b){ b.addEventListener('click',function(){ close(); var c=document.getElementById('couponPop'); if(c){ c.querySelector('.coupon-pop__msg').textContent='로그인 후 이용 가능합니다.'; c.classList.add('is-open'); c.querySelector('.coupon-pop__ok').focus(); } }); });
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape'&&pop.classList.contains('is-open')) close(); });
+})();
+</script>
+<script>
+(function(){
+  var pop=document.getElementById('couponPop'), btn=document.querySelector('.pulse-btn'), ok=pop.querySelector('.coupon-pop__ok'), last=null;
+  function open(){ pop.querySelector('.coupon-pop__msg').textContent='로그인 시 다운로드 가능합니다.'; last=document.activeElement; pop.classList.add('is-open'); ok.focus(); }
+  function close(){ pop.classList.remove('is-open'); if(last&&last.focus) last.focus(); }
+  btn.addEventListener('click',open);
+  btn.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); open(); } });
+  ok.addEventListener('click',close);
+  pop.addEventListener('click',function(e){ if(e.target===pop) close(); });
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape'&&pop.classList.contains('is-open')) close(); });
+})();
+</script>
+</body>
+</html>

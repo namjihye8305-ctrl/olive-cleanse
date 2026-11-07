@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SUNLIT · A SIP OF SUMMER | Summer Editorial</title>
+  <meta name="description" content="가상 과일 음료 브랜드 SUNLIT의 여름 에디토리얼. MANGO + CITRUS · Concept Project · AI-assisted Visuals" />
+  <meta name="theme-color" content="#12dde1" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="SUNLIT SUMMER EDITORIAL" />
+  <meta property="og:title" content="SUNLIT · A SIP OF SUMMER" />
+  <meta property="og:description" content="망고와 시트러스의 생기를 한 병에. SUNLIT 여름 에디토리얼 (Concept Project · AI-assisted Visuals)" />
+  <meta property="og:image" content="https://namjihye8305-ctrl.github.io/olive-cleanse/assets/sunlit/01_hero_a.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="preload" as="image" href="assets/sunlit/01_hero_a.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Yellowtail&display=swap" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+  <link rel="stylesheet" href="css/sunlit.css" />
+  <script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+<!-- ================================================================
+     SUNLIT · Summer Editorial (Concept Project)
+     Mobile 750px 에디토리얼 기준 · 데스크톱 중앙 정렬
+     * 사진은 assets/sunlit/ 낱장 이미지, 텍스트·그래픽은 전부 HTML/CSS 레이어
+     * .hero-swipe / .swipe   = 2장 좌우 자동 스와이프 (+ 텍스트 레이어)
+     * .photo-fade            = 3장 자동 크로스페이드
+     * .parallax              = 사진 전체 가벼운 패럴랙스 (JS 스크롤 연동)
+     * .reveal-txt / .mask-reveal = 스크롤 진입 시 등장 (js/sunlit.js)
+     ================================================================ -->
+<main class="canvas">
+
+  <!-- 상단 바 -->
+  <header class="topbar">
+    <a class="topbar__logo" href="#top">SUNLIT</a>
+    <span class="topbar__meta">SUMMER EDITORIAL</span>
+  </header>
+
+  <!-- 01 HERO : 메인 A ↔ 메인 B 전환 + 타이틀 -->
+  <section class="hero-swipe" id="top" aria-label="A SIP OF SUMMER">
+    <div class="hero-swipe__track">
+      <img src="assets/sunlit/01_hero_a.png" alt="코럴 민소매 차림의 모델이 오렌지 조각을 볼 옆에 들고, 테이블 위 SUNLIT 병과 과일 앞에 앉아 있다" fetchpriority="high" />
+      <img src="assets/sunlit/02_hero_b.png" alt="코발트 메쉬백에 SUNLIT 병과 과일을 담고 어깨에 타월을 걸친 모델" />
+    </div>
+    <div class="hero-swipe__title">
+      <p class="hero-swipe__sub">SUNLIT · MANGO + CITRUS</p>
+      <h1><span class="t-heavy">A SIP OF</span><span class="t-script">Summer</span></h1>
+    </div>
+  </section>
+
+  <!-- 02 브랜드 소개 패널 (히어로 하단과 겹침) -->
+  <section class="brand-panel" id="about" aria-labelledby="about-title">
+    <svg class="logo-wobble" viewBox="0 0 140 140" aria-hidden="true">
+      <defs><path id="badgeCircle" d="M70,70 m-49,0 a49,49 0 1,1 98,0 a49,49 0 1,1 -98,0" /></defs>
+      <circle cx="70" cy="70" r="69" fill="#0b4f58" />
+      <text class="badge-text"><textPath href="#badgeCircle" textLength="304" lengthAdjust="spacingAndGlyphs">SUNLIT · SUMMER · EDITORIAL ·</textPath></text>
+      <circle cx="70" cy="70" r="17" fill="#ff7a1a" />
+    </svg>
+    <svg class="brand-panel__sun" viewBox="0 0 64 64" aria-hidden="true">
+      <circle cx="32" cy="32" r="12" fill="none" stroke="currentColor" stroke-width="3" />
+      <g stroke="currentColor" stroke-width="3" stroke-linecap="round">
+        <path d="M32 4v8M32 52v8M4 32h8M52 32h8M12.2 12.2l5.7 5.7M46.1 46.1l5.7 5.7M12.2 51.8l5.7-5.7M46.1 17.9l5.7-5.7" />
+      </g>
+    </svg>
+    <h2 class="brand-panel__name" id="about-title">SUNLIT</h2>
+    <p class="brand-panel__sub">MANGO + CITRUS</p>
+    <p class="brand-panel__copy">
+      햇살이 길어지는 계절,<br />
+      망고와 시트러스의 생기를 한 병에.<br />
+      움직이고, 쉬고, 다시 여름을 즐기는<br />
+      당신의 순간에 SUNLIT.
+    </p>
+  </section>
+
+  <!-- 03 가로 화보 + 타이틀 -->
+  <section class="wide parallax" aria-label="Sunlit Summer">
+    <img src="assets/sunlit/03_intro_wide.png" alt="스트라이프 선베드에 기대 누운 모델과 코발트 테이블 위 SUNLIT 병, 오렌지" loading="lazy" />
+    <p class="wide__title reveal-txt" aria-hidden="true"><span class="t-script">Sunlit</span><span class="t-heavy">SUMMER</span></p>
+  </section>
+
+  <!-- 04 SUMMER ESSENTIALS (기존 쿠폰/혜택 영역 재구성) -->
+  <section class="essentials" aria-labelledby="ess-title">
+    <h2 class="essentials__title" id="ess-title"><span class="t-heavy">SUMMER</span><span class="t-script">Essentials</span></h2>
+
+    <article class="ess">
+      <p class="ess__label">ESSENTIAL. 01</p>
+      <p class="ess__lead">아이보리 보틀과 주황 캡,<br />한 손에 쥐는 여름 한 병.</p>
+      <div class="ticket">
+        <span class="ticket__thumb"><img src="assets/sunlit/10_benefit_pack.png" alt="아이보리 SUNLIT 병과 주황 캡" loading="lazy" /></span>
+        <div class="ticket__body">
+          <p class="ticket__kicker">SUNLIT BOTTLE</p>
+          <p class="ticket__big">MANGO<br />+ CITRUS</p>
+          <p class="ticket__meta">IVORY BOTTLE · ORANGE CAP</p>
+        </div>
+        <a class="pulse-btn" href="#enjoy" aria-label="음료 즐기는 방법 보기">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v13M6 12l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" /></svg>
+        </a>
+      </div>
+    </article>
+
+    <article class="ess ess--photo">
+      <figure class="ess__photo">
+        <img src="assets/sunlit/11_hand_tumbler.png" alt="손끝으로 주황 뚜껑을 잡은 SUNLIT 텀블러" loading="lazy" />
+        <span class="ess__badge" aria-hidden="true">SUMMER<br />PICK</span>
+      </figure>
+      <div class="ess__text">
+        <p class="ess__label">ESSENTIAL. 02</p>
+        <p class="ess__title">SUNLIT TUMBLER</p>
+        <p class="ess__lead">주황 캡 텀블러에 담아,<br />어디서든 시원한<br />여름 한 잔.</p>
+      </div>
+    </article>
+  </section>
+
+  <!-- 05 CHAPTER 01 -->
+  <header class="chapter chapter--01">
+    <span class="chapter__star chapter__star--a" aria-hidden="true"></span>
+    <span class="chapter__star chapter__star--b" aria-hidden="true"></span>
+    <h2 class="chapter__title"><span class="t-heavy">MOVE INTO</span> <span class="t-script">Summer</span></h2>
+    <p class="chapter__ko">가볍게 움직이는 여름</p>
+    <p class="chapter__no">CHAPTER. 01</p>
+  </header>
+
+  <!-- 06 운동 화보 스와이프 + 텍스트 -->
+  <section class="swipe">
+    <div class="swipe__track">
+      <img src="assets/sunlit/04_sport_seated.png" alt="노랑 상의와 틸 쇼츠 차림으로 코럴 코트에 앉아 SUNLIT 병을 든 모델" loading="lazy" />
+      <img src="assets/sunlit/05_sport_movement.png" alt="SUNLIT 병을 들고 팔을 머리 위로 올려 스트레칭하는 전신 모델" loading="lazy" />
+    </div>
+    <p class="txt-box swipe__box swipe__box--top reveal-txt dir-right">몸을 움직이는 시간도,<br />잠시 숨을 고르는 순간도.</p>
+    <p class="txt-box swipe__box swipe__box--bottom reveal-txt dir-left">여름의 리듬에<br />산뜻한 한 모금을 더해보세요.</p>
+  </section>
+
+  <!-- 07 Move & Rest : 민트 그래픽 + 아치 마스크 사진 -->
+  <section class="rest mint-bg">
+    <span class="chapter__star rest__star" aria-hidden="true"></span>
+    <h3 class="rest__title reveal-txt"><span class="t-script">Move</span> <span class="t-heavy">&amp; REST</span></h3>
+    <p class="rest__copy reveal-txt">움직인 만큼, 잠시 쉬어가는<br />여름의 한 장면.</p>
+    <figure class="rest__photo mask-reveal">
+      <img src="assets/sunlit/06_sport_close.png" alt="노랑 상의 차림으로 코발트 테이블에 팔을 포개고 눈을 감은 채 웃는 모델과 SUNLIT 병" loading="lazy" />
+    </figure>
+  </section>
+
+  <!-- 08 CHAPTER 02 -->
+  <header class="chapter chapter--02">
+    <span class="chapter__star chapter__star--a" aria-hidden="true"></span>
+    <span class="chapter__star chapter__star--b" aria-hidden="true"></span>
+    <p class="chapter__no">CHAPTER. 02</p>
+    <h2 class="chapter__title"><span class="t-heavy">FULL OF</span> <span class="t-script">Sunshine</span></h2>
+    <p class="chapter__ko">과일의 생기를 담아</p>
+  </header>
+
+  <!-- 09 하이앵글 화보 + 텍스트 -->
+  <section class="fruit parallax">
+    <img src="assets/sunlit/08_overhead_portrait.png" alt="코발트 테이블에 앉은 모델과 SUNLIT 병, 오렌지와 망고가 보이는 하이앵글 화보" loading="lazy" />
+    <p class="txt-box fruit__box reveal-txt dir-right">망고의 부드러운 달콤함과<br />시트러스의 산뜻한 인상.</p>
+  </section>
+
+  <!-- 10 과일·제품 크로스페이드 x3 -->
+  <section class="fade-card mint-bg">
+    <p class="fade-card__copy reveal-txt">햇살처럼 선명한<br />여름의 맛을 만나보세요.</p>
+    <div class="photo-fade">
+      <img src="assets/sunlit/12_fruit_basket.png" alt="코발트 와이어 바구니 속 SUNLIT 병과 망고, 오렌지" loading="lazy" />
+      <img src="assets/sunlit/13_fruit_sculpture.png" alt="화이트 배경 위 SUNLIT 병과 망고, 오렌지, 자몽 정물" loading="lazy" />
+      <img src="assets/sunlit/15_diagonal_pack.png" alt="코발트 큐브에 비스듬히 기댄 SUNLIT 병과 주황 텀블러 음료" loading="lazy" />
+    </div>
+    <p class="fade-card__tag">MANGO + CITRUS</p>
+  </section>
+
+  <!-- 11 제품 바 (가격 영역 대체) -->
+  <a class="product-bar" href="#about">
+    <img src="assets/sunlit/10_benefit_pack.png" alt="" loading="lazy" />
+    <span class="product-bar__text">
+      <strong>SUNLIT</strong>
+      <span>MANGO + CITRUS</span>
+    </span>
+    <span class="product-bar__tag">CONCEPT<br />PRODUCT</span>
+  </a>
+
+  <!-- 12 HOW TO ENJOY : 아래→위 등장 후 2장 크로스페이드 -->
+  <section class="rise-fade mint-bg" aria-labelledby="howto-title">
+    <span class="chapter__star rise-fade__star" aria-hidden="true"></span>
+    <h2 class="rise-fade__title" id="howto-title"><span class="t-heavy">HOW TO</span> <span class="t-script">Enjoy</span></h2>
+    <p class="rise-fade__sub">CHILL · SHAKE · POUR</p>
+    <div class="rf-card">
+      <img class="rf-a" src="assets/sunlit/11_hand_tumbler.png" alt="손으로 주황 뚜껑을 잡은 SUNLIT 텀블러 클로즈업" loading="lazy" />
+      <img class="rf-b" src="assets/sunlit/16_beach_still.png" alt="코럴 비치타월 위 SUNLIT 병과 잔에 따른 음료" loading="lazy" />
+    </div>
+  </section>
+
+  <!-- 13 CHILL / SHAKE / POUR (기존 섭취 스케줄 대체) -->
+  <section class="steps" id="enjoy" aria-label="음료 즐기는 방법">
+    <ol class="steps__list">
+      <li class="step step-0">
+        <svg class="step__icon" viewBox="0 0 48 48" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M24 6v36M8.4 15l31.2 18M8.4 33l31.2-18" /><path d="M19 9l5 4 5-4M19 39l5-4 5 4M8 21l6-1-2-6M40 27l-6 1 2 6M12 34l2-6-6-1M36 14l-2 6 6 1" /></g></svg>
+        <span class="step__no">01</span>
+        <span class="step__en">CHILL</span>
+        <span class="step__ko">시원하게 준비하고</span>
+      </li>
+      <li class="step step-1">
+        <svg class="step__icon" viewBox="0 0 48 48" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><rect x="17" y="12" width="14" height="30" rx="6" /><path d="M19 6h10v6H19z" /><path d="M8 18c-2 3-2 9 0 12M40 18c2 3 2 9 0 12M12 21c-1 2-1 4 0 6M36 21c1 2 1 4 0 6" /></g></svg>
+        <span class="step__no">02</span>
+        <span class="step__en">SHAKE</span>
+        <span class="step__ko">가볍게 흔들어</span>
+      </li>
+      <li class="step step-2">
+        <svg class="step__icon" viewBox="0 0 48 48" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M13 20h22l-3 22H16z" /><path d="M14.5 30h19" /><path d="M30 6l-6 6M24 12v4" /></g></svg>
+        <span class="step__no">03</span>
+        <span class="step__en">POUR</span>
+        <span class="step__ko">잔에 따라 즐겨보세요</span>
+      </li>
+    </ol>
+  </section>
+
+  <!-- 14 제품 컷 : 스크롤하면 줌인 + 블러→선명 (사진 전체) -->
+  <div class="scrub-zoom blur-scrub">
+    <img src="assets/sunlit/14_stool_pack.png" alt="주황 스툴 위 SUNLIT 병과 텀블러, 망고와 오렌지" loading="lazy" />
+  </div>
+
+  <!-- 15 CHAPTER 03 -->
+  <header class="chapter chapter--03">
+    <span class="chapter__star chapter__star--a" aria-hidden="true"></span>
+    <span class="chapter__star chapter__star--b" aria-hidden="true"></span>
+    <p class="chapter__no">CHAPTER. 03</p>
+    <h2 class="chapter__title"><span class="t-script">Sip,</span> <span class="t-heavy">SLOW DOWN</span></h2>
+    <p class="chapter__ko">한 모금, 여름의 속도로</p>
+  </header>
+
+  <!-- 16 스크롤하는 동안 화보 → 제품 슬라이드 (+드래그) -->
+  <section class="scrub-slide slide-late">
+    <div class="scrub-slide__track">
+      <img src="assets/sunlit/09_vacance_portrait.png" alt="코럴 벤치에 앉아 쉬는 모델과 옆에 놓인 SUNLIT 병" loading="lazy" draggable="false" />
+      <img src="assets/sunlit/17_group_pack.png" alt="코럴 크레이트 위에 놓인 SUNLIT 병들과 텀블러, 망고와 오렌지" loading="lazy" draggable="false" />
+    </div>
+    <p class="scrub-slide__copy reveal-txt">바쁘게 채우기보다,<br />좋아하는 순간을 천천히 즐기는 시간.<br /><strong>당신의 여름 곁에 SUNLIT.</strong></p>
+  </section>
+
+  <!-- 17 엔딩 -->
+  <section class="ending parallax" aria-labelledby="ending-title">
+    <img src="assets/sunlit/18_striped_chair.png" alt="파랑·노랑 스트라이프 체어 위 SUNLIT 병과 오렌지" loading="lazy" />
+    <h2 class="ending__title reveal-txt" id="ending-title"><span class="t-heavy">TAKE YOUR</span><span class="t-script">Summer</span><span class="t-heavy">WITH YOU</span></h2>
+    <a class="ending__btn" href="#about">EXPLORE SUNLIT</a>
+  </section>
+
+  <!-- 18 푸터 -->
+  <footer class="footer">
+    <p class="footer__title">SUNLIT SUMMER EDITORIAL</p>
+    <p class="footer__meta">Concept Project · AI-assisted Visuals</p>
+  </footer>
+
+</main>
+<script src="js/sunlit.js"></script>
+</body>
+</html>
