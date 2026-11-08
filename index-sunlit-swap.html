@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800&display=swap" />
   <style>
+    .r18-label{ position:absolute; margin:0; z-index:2; white-space:nowrap; line-height:1; transform:translateX(-50%); font-family:"Pretendard", system-ui, sans-serif; font-weight:500; font-size:calc(var(--u)*30); color:#2f6177; }
     .r18-title{ position:absolute; left:calc(var(--u)*91); margin:0; z-index:2; white-space:nowrap; line-height:1; font-family:"Montserrat", sans-serif; font-weight:800; font-size:calc(var(--u)*58); letter-spacing:-0.01em; color:#ff6a00; }
     :root{ --u: calc(min(100vw, 750px) / 750); }
     .swap-txt-wrap{ position:relative; }
@@ -175,11 +176,19 @@
     <img class="rf-b" src="img/sunlit-swap/r17-b.png" alt="" />
   </div>
 
-  <!-- 18 HOW/WHERE TO ENJOY : 주스 아이콘 8개가 순서대로 하나씩 나타남(무한반복) -->
+  <!-- 18 HOW/WHERE TO ENJOY : 주스 아이콘 8개가 순서대로 하나씩 나타남(무한반복) / 타이틀·라벨·배지는 선명도를 위해 HTML·SVG -->
   <div class="glass-wrap">
-    <img src="img/sunlit-orange/r18-v4.png" alt="CHILL · SHAKE · POUR · ENJOY, 네 단계로 즐기는 여름 한 잔" />
+    <img src="img/sunlit-orange/r18-v5.png" alt="CHILL · SHAKE · POUR · ENJOY, 네 단계로 즐기는 여름 한 잔" />
     <p class="r18-title" style="top:calc(var(--u)*275);">STEP BY STEP</p>
     <p class="r18-title" style="top:calc(var(--u)*721);">WHERE TO ENJOY</p>
+    <p class="r18-label" style="left:calc(var(--u)*140.5);top:calc(var(--u)*565);">CHILL</p>
+    <p class="r18-label" style="left:calc(var(--u)*274.5);top:calc(var(--u)*565);">SHAKE</p>
+    <p class="r18-label" style="left:calc(var(--u)*408.5);top:calc(var(--u)*565);">POUR</p>
+    <p class="r18-label" style="left:calc(var(--u)*542);top:calc(var(--u)*565);">ENJOY</p>
+    <p class="r18-label" style="left:calc(var(--u)*140.5);top:calc(var(--u)*1006);">COURT</p>
+    <p class="r18-label" style="left:calc(var(--u)*275.5);top:calc(var(--u)*1006);">POOL</p>
+    <p class="r18-label" style="left:calc(var(--u)*407.5);top:calc(var(--u)*1006);">BEACH</p>
+    <p class="r18-label" style="left:calc(var(--u)*541.5);top:calc(var(--u)*1006);">SUNSET</p>
     <img class="glass-icon glass-icon-0" style="left:15.333%;top:40.485%;width:6.933%;" src="img/assets2/glass.png" alt="" />
     <img class="glass-icon glass-icon-1" style="left:33.2%;top:40.485%;width:6.933%;" src="img/assets2/glass.png" alt="" />
     <img class="glass-icon glass-icon-2" style="left:50.933%;top:40.485%;width:6.933%;" src="img/assets2/glass.png" alt="" />
@@ -188,8 +197,8 @@
     <img class="glass-icon glass-icon-5" style="left:33.2%;top:80.072%;width:6.933%;" src="img/assets2/glass.png" alt="" />
     <img class="glass-icon glass-icon-6" style="left:50.933%;top:80.072%;width:6.933%;" src="img/assets2/glass.png" alt="" />
     <img class="glass-icon glass-icon-7" style="left:68.8%;top:80.072%;width:6.933%;" src="img/assets2/glass.png" alt="" />
-    <img class="day-badge" style="left:73.067%;top:41.203%;width:16.667%;" src="img/sunlit-orange/badge-day1.png" alt="SUNLIT" />
-    <img class="day-badge" style="left:73.067%;top:81.059%;width:16.667%;" src="img/sunlit-copy/badge-day2.png" alt="SUMMER" />
+    <svg class="day-badge" style="left:73.067%;top:41.203%;width:16.667%;" viewBox="0 0 126 60" role="img" aria-label="SUNLIT"><g transform="rotate(-15 62.5 29.5)"><ellipse cx="62.5" cy="29.5" rx="63.3" ry="24.1" fill="#ff6b02" fill-opacity="0.9"/><text x="62.5" y="29.5" text-anchor="middle" dominant-baseline="central" font-family="Montserrat, sans-serif" font-weight="800" font-size="19" fill="#fff">SUNLIT</text></g></svg>
+    <svg class="day-badge" style="left:73.067%;top:81.059%;width:16.667%;" viewBox="0 0 126 60" role="img" aria-label="SUMMER"><g transform="rotate(-15 62.5 29.5)"><ellipse cx="62.5" cy="29.5" rx="63.3" ry="24.1" fill="#20698b" fill-opacity="0.9"/><text x="62.5" y="29.5" text-anchor="middle" dominant-baseline="central" font-family="Montserrat, sans-serif" font-weight="800" font-size="19" fill="#fff">SUMMER</text></g></svg>
   </div>
   <!-- 19 붓는 사진 : 스크롤하면 줌인 + 블러→선명 -->
   <div class="scrub-zoom blur-scrub">
